@@ -1,0 +1,30 @@
+generated: '2026-07-18'
+method: searched
+source: https://tradingapi.bullet.xyz/docs/tx-signing.html
+docs: https://tradingapi.bullet.xyz/docs/account-setup.html
+summary:
+  types: [signature]
+  model: ed25519 signed transactions (Solana-style)
+  read_access: public (market-data and health endpoints require no credentials)
+  write_access: ed25519-signed transactions submitted to the exchange
+notes: >-
+  The Bullet Trading API declares no OAuth2 / API-key security schemes in its OpenAPI. Read
+  endpoints (Market-Data, Health, and most Account queries) are open. All write operations
+  (placing/cancelling orders, deposits/withdrawals) are submitted as ed25519-signed
+  transactions: build the call message, wrap in an UnsignedTransaction (call + uniqueness +
+  tx details), sign borsh(unsigned_tx) ++ chain_hash with an ed25519 key, wrap in a
+  SignedTransaction, base64-encode, and POST to /tx/submit (or over WebSocket).
+schemes:
+- name: ed25519-signed-transaction
+  type: signature
+  algorithm: Ed25519
+  applies_to: [POST /tx/submit, POST /api/v1/solanaOffchainTx, POST /rollup/simulate]
+  sources: [https://tradingapi.bullet.xyz/docs/tx-signing.html]
+delegate_accounts:
+  supported: true
+  docs: https://docs.bullet.xyz/exchange/help-center/delegate-accounts-and-api.md
+  description: >-
+    A delegate account is a separate ed25519 keypair authorized by the main wallet to sign
+    API/trading transactions, so automated clients never hold the primary wallet key. Delegate
+    wallet addresses are ed25519 addresses; the delegate private key is used to sign submitted
+    transactions.
