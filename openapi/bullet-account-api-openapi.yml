@@ -1,0 +1,666 @@
+openapi: 3.1.0
+info:
+  title: Bullet Trading Account API
+  description: REST API for the Bullet exchange. Provides Binance FAPI-compatible endpoints for trading, account management, and market data.
+  contact:
+    name: Bullet
+    url: https://bullet.xyz
+  license:
+    name: Proprietary
+  version: 0.1.0
+servers:
+- url: /
+  description: Current server
+- url: https://tradingapi.mainnet.bullet.xyz
+  description: Mainnet
+- url: https://tradingapi.testnet.bullet.xyz
+  description: Testnet
+- url: https://tradingapi.staging.bullet.xyz
+  description: Staging
+tags:
+- name: Account
+paths:
+  /api/v1/accountConfig:
+    get:
+      tags:
+      - Account
+      summary: Account Configuration (Bullet-specific)
+      operationId: account_config
+      parameters:
+      - name: address
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountConfig'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /api/v1/balance:
+    get:
+      tags:
+      - Account
+      summary: Account Balance (Bullet-specific)
+      description: 'Superset of `/fapi/v3/balance` that surfaces data the rollup already
+
+        returns but the Binance-shaped endpoint doesn''t expose:
+
+        account-level trading credits / unrealized loss borrow, per-asset
+
+        gross asset/liability amounts, and referral rewards.'
+      operationId: account_balance_bullet
+      parameters:
+      - name: address
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account balance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBalance'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /fapi/v1/commissionRate:
+    get:
+      tags:
+      - Account
+      summary: User Commission Rate (USER_DATA)
+      operationId: commission_rate
+      parameters:
+      - name: address
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User commission rate
+  /fapi/v1/leverageBracket:
+    get:
+      tags:
+      - Account
+      summary: Notional and Leverage Brackets (USER_DATA)
+      operationId: leverage_bracket
+      parameters:
+      - name: symbol
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      responses:
+        '200':
+          description: User notional and leverage brackets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LeverageBracket'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Market not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /fapi/v1/rateLimit/order:
+    get:
+      tags:
+      - Account
+      summary: Query User Rate Limit (USER_DATA)
+      operationId: rate_limit_order
+      responses:
+        '501':
+          description: User rate limit
+  /fapi/v1/symbolConfig:
+    get:
+      tags:
+      - Account
+      summary: Symbol Configuration (USER_DATA)
+      operationId: symbol_config
+      parameters:
+      - name: address
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      responses:
+        '200':
+          description: Symbol configuration
+  /fapi/v3/account:
+    get:
+      tags:
+      - Account
+      summary: Get current account information
+      operationId: account_info
+      parameters:
+      - name: address
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /fapi/v3/balance:
+    get:
+      tags:
+      - Account
+      summary: Get account balance
+      operationId: account_balance
+      parameters:
+      - name: address
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account balance
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Balance'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+components:
+  schemas:
+    AssetReward:
+      type: object
+      required:
+      - asset
+      - assetId
+      - variant
+      - cumulativeAmount
+      - claimedAmount
+      - unclaimedAmount
+      properties:
+        asset:
+          type: string
+        assetId:
+          type: integer
+          format: uint16
+          minimum: 0
+        claimedAmount:
+          type: string
+          format: decimal
+        cumulativeAmount:
+          type: string
+          format: decimal
+        unclaimedAmount:
+          type: string
+          format: decimal
+        variant:
+          type: string
+    AccountConfig:
+      type: object
+      required:
+      - delegates
+      properties:
+        delegates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Delegate'
+    ApiErrorDetail:
+      oneOf:
+      - $ref: '#/components/schemas/JsonValidationErrorDetail'
+      - type: object
+      description: 'Typed details body. Variant order is important for untagged
+
+        deserialization: keep the more-specific shape (`JsonValidation`)
+
+        before more-permissive ones. `Upstream` holds the upstream payload
+
+        verbatim (object, string, array, number, etc.) so pre-PR clients
+
+        reading `details.error` (or `details` directly) keep working.'
+    AccountAsset:
+      type: object
+      required:
+      - asset
+      - assetId
+      - walletBalance
+      - updateTime
+      properties:
+        asset:
+          type: string
+        assetId:
+          type: integer
+          format: uint16
+          minimum: 0
+        updateTime:
+          type: integer
+          format: int64
+        walletBalance:
+          type: string
+          format: decimal
+    Bracket:
+      type: object
+      required:
+      - bracket
+      - initialLeverage
+      - notionalCap
+      - notionalFloor
+      - maintMarginRatio
+      - cum
+      properties:
+        bracket:
+          type: integer
+          format: uint32
+          minimum: 0
+        cum:
+          type: number
+          format: double
+        initialLeverage:
+          type: integer
+          format: uint32
+          minimum: 0
+        maintMarginRatio:
+          type: number
+          format: double
+        notionalCap:
+          type: number
+          format: double
+        notionalFloor:
+          type: number
+          format: double
+    AssetBalance:
+      type: object
+      required:
+      - asset
+      - assetId
+      - balance
+      - assetAmount
+      - liabilityAmount
+      - maxWithdrawAmount
+      - updateTime
+      properties:
+        asset:
+          type: string
+        assetAmount:
+          type: string
+          format: decimal
+        assetId:
+          type: integer
+          format: uint16
+          minimum: 0
+        balance:
+          type: string
+          format: decimal
+        liabilityAmount:
+          type: string
+          format: decimal
+        maxWithdrawAmount:
+          type: string
+          format: decimal
+        updateTime:
+          type: integer
+          format: int64
+    AccountBalance:
+      type: object
+      required:
+      - account
+      - assets
+      - rewards
+      properties:
+        account:
+          $ref: '#/components/schemas/AccountBalanceSummary'
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetBalance'
+        rewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetReward'
+    JsonValidationErrorDetail:
+      type: object
+      description: 'One JSON shape failure: machine-readable `rule` + full serde
+
+        message including line/column. Surfaced under `details` on the wire.'
+      required:
+      - rule
+      - message
+      properties:
+        message:
+          type: string
+          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
+        rule:
+          type: string
+          example: wrong_type
+    Balance:
+      type: object
+      required:
+      - accountAlias
+      - asset
+      - balance
+      - crossWalletBalance
+      - crossUnPnl
+      - availableBalance
+      - maxWithdrawAmount
+      - marginAvailable
+      - updateTime
+      properties:
+        accountAlias:
+          type: string
+        asset:
+          type: string
+        availableBalance:
+          type: string
+          format: decimal
+        balance:
+          type: string
+          format: decimal
+        crossUnPnl:
+          type: string
+          format: decimal
+        crossWalletBalance:
+          type: string
+          format: decimal
+        marginAvailable:
+          type: boolean
+        maxWithdrawAmount:
+          type: string
+          format: decimal
+        updateTime:
+          type: integer
+          format: int64
+    AccountPosition:
+      type: object
+      required:
+      - symbol
+      - marketId
+      - unrealizedProfit
+      - entryPrice
+      - initialMargin
+      - maintMargin
+      - positionSide
+      - positionAmt
+      - updateTime
+      properties:
+        entryPrice:
+          type: string
+          format: decimal
+        initialMargin:
+          type: string
+          format: decimal
+        maintMargin:
+          type: string
+          format: decimal
+        marketId:
+          type: integer
+          format: uint16
+          minimum: 0
+        positionAmt:
+          type: string
+          format: decimal
+        positionSide:
+          type: string
+        symbol:
+          type: string
+        unrealizedProfit:
+          type: string
+          format: decimal
+        updateTime:
+          type: integer
+          format: int64
+    Account:
+      type: object
+      required:
+      - totalInitialMargin
+      - totalMaintMargin
+      - totalWalletBalance
+      - totalUnrealizedProfit
+      - totalMarginBalance
+      - totalPositionInitialMargin
+      - totalOpenOrderInitialMargin
+      - totalCrossWalletBalance
+      - totalCrossUnPnl
+      - availableBalance
+      - maxWithdrawAmount
+      - feeTier
+      - feeDiscountBps
+      - assets
+      - positions
+      properties:
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountAsset'
+        availableBalance:
+          type: string
+          format: decimal
+        feeDiscountBps:
+          type: integer
+          format: int32
+          minimum: 0
+        feeTier:
+          type: integer
+          format: int32
+          minimum: 0
+        maxWithdrawAmount:
+          type: string
+          format: decimal
+        positions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountPosition'
+        totalCrossUnPnl:
+          type: string
+          format: decimal
+        totalCrossWalletBalance:
+          type: string
+          format: decimal
+        totalInitialMargin:
+          type: string
+          format: decimal
+        totalMaintMargin:
+          type: string
+          format: decimal
+        totalMarginBalance:
+          type: string
+          format: decimal
+        totalOpenOrderInitialMargin:
+          type: string
+          format: decimal
+        totalPositionInitialMargin:
+          type: string
+          format: decimal
+        totalUnrealizedProfit:
+          type: string
+          format: decimal
+        totalWalletBalance:
+          type: string
+          format: decimal
+    AccountBalanceSummary:
+      type: object
+      required:
+      - tradingCredits
+      - unrealizedLossBorrow
+      properties:
+        tradingCredits:
+          type: string
+          format: decimal
+        unrealizedLossBorrow:
+          type: string
+          format: decimal
+    Delegate:
+      type: object
+      required:
+      - address
+      - name
+      - flags
+      properties:
+        address:
+          type: string
+        expiresAt:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        flags:
+          type: integer
+          format: int32
+          minimum: 0
+        name:
+          type: string
+    LeverageBracket:
+      type: object
+      required:
+      - symbol
+      - brackets
+      properties:
+        brackets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bracket'
+        notionalCoef:
+          type:
+          - number
+          - 'null'
+          format: double
+        symbol:
+          type: string
+    ApiErrorResponse:
+      type: object
+      description: 'Structured API error response matching Bullet API format.
+
+
+        All error responses from the trading API conform to this schema.'
+      required:
+      - status
+      - message
+      properties:
+        details:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiErrorDetail'
+            description: Structured per-failure details. Shape depends on the variant.
+        error_id:
+          type:
+          - string
+          - 'null'
+          description: Error identifier for support.
+          example: 8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f
+        message:
+          type: string
+          description: Human-readable error message.
+          example: 'Transaction validation failed: insufficient funds'
+        status:
+          type: integer
+          format: uint16
+          description: HTTP status code.
+          example: 400
+          minimum: 0

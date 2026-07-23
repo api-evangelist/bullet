@@ -1,0 +1,134 @@
+openapi: 3.1.0
+info:
+  title: Bullet Trading Account Address API
+  description: REST API for the Bullet exchange. Provides Binance FAPI-compatible endpoints for trading, account management, and market data.
+  contact:
+    name: Bullet
+    url: https://bullet.xyz
+  license:
+    name: Proprietary
+  version: 0.1.0
+servers:
+- url: /
+  description: Current server
+- url: https://tradingapi.mainnet.bullet.xyz
+  description: Mainnet
+- url: https://tradingapi.testnet.bullet.xyz
+  description: Testnet
+- url: https://tradingapi.staging.bullet.xyz
+  description: Staging
+tags:
+- name: Address
+paths:
+  /api/v1/addressState:
+    get:
+      tags:
+      - Address
+      summary: Per-credential on-chain state used by clients when constructing txs.
+      operationId: address_state
+      parameters:
+      - name: address
+        in: query
+        description: signing credential address (base58)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Address state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressState'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+components:
+  schemas:
+    ApiErrorResponse:
+      type: object
+      description: 'Structured API error response matching Bullet API format.
+
+
+        All error responses from the trading API conform to this schema.'
+      required:
+      - status
+      - message
+      properties:
+        details:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiErrorDetail'
+            description: Structured per-failure details. Shape depends on the variant.
+        error_id:
+          type:
+          - string
+          - 'null'
+          description: Error identifier for support.
+          example: 8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f
+        message:
+          type: string
+          description: Human-readable error message.
+          example: 'Transaction validation failed: insufficient funds'
+        status:
+          type: integer
+          format: uint16
+          description: HTTP status code.
+          example: 400
+          minimum: 0
+    ApiErrorDetail:
+      oneOf:
+      - $ref: '#/components/schemas/JsonValidationErrorDetail'
+      - type: object
+      description: 'Typed details body. Variant order is important for untagged
+
+        deserialization: keep the more-specific shape (`JsonValidation`)
+
+        before more-permissive ones. `Upstream` holds the upstream payload
+
+        verbatim (object, string, array, number, etc.) so pre-PR clients
+
+        reading `details.error` (or `details` directly) keep working.'
+    JsonValidationErrorDetail:
+      type: object
+      description: 'One JSON shape failure: machine-readable `rule` + full serde
+
+        message including line/column. Surfaced under `details` on the wire.'
+      required:
+      - rule
+      - message
+      properties:
+        message:
+          type: string
+          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
+        rule:
+          type: string
+          example: wrong_type
+    AddressState:
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          type: string
+          description: the queried address, echoed back as supplied
+        generation:
+          type:
+          - integer
+          - 'null'
+          format: uint64
+          description: 'highest uniqueness generation this credential has submitted with,
+
+            or null if it has never submitted a tx. clients use this to seed a
+
+            monotonic generation override so the next tx doesn''t collide'
+          minimum: 0

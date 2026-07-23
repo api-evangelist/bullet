@@ -1,0 +1,1217 @@
+openapi: 3.1.0
+info:
+  title: Bullet Trading Account Market-Data API
+  description: REST API for the Bullet exchange. Provides Binance FAPI-compatible endpoints for trading, account management, and market data.
+  contact:
+    name: Bullet
+    url: https://bullet.xyz
+  license:
+    name: Proprietary
+  version: 0.1.0
+servers:
+- url: /
+  description: Current server
+- url: https://tradingapi.mainnet.bullet.xyz
+  description: Mainnet
+- url: https://tradingapi.testnet.bullet.xyz
+  description: Testnet
+- url: https://tradingapi.staging.bullet.xyz
+  description: Staging
+tags:
+- name: Market-Data
+paths:
+  /fapi/v1/borrowLendPools:
+    get:
+      tags:
+      - Market-Data
+      summary: Borrow Lend Pools - Doesnt exist in Binance
+      operationId: borrow_lend_pools
+      parameters:
+      - name: symbol
+        in: query
+        description: Symbol
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: BorrowLendPools
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BorrowLendPoolResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /fapi/v1/depth:
+    get:
+      tags:
+      - Market-Data
+      summary: Get orderbook
+      operationId: order_book
+      parameters:
+      - name: symbol
+        in: query
+        description: Symbol
+        required: true
+        schema:
+          type: string
+        example: BTC-USD
+      - name: limit
+        in: query
+        description: Limit (default 20, max 1000)
+        required: false
+        schema:
+          type: integer
+          format: int32
+          minimum: 0
+        example: 20
+      responses:
+        '200':
+          description: Order book
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderBook'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Market not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /fapi/v1/exchangeInfo:
+    get:
+      tags:
+      - Market-Data
+      summary: Get current exchange trading rules and symbol information
+      operationId: exchange_info
+      responses:
+        '200':
+          description: Exchange information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExchangeInfo'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /fapi/v1/fundingInfo:
+    get:
+      tags:
+      - Market-Data
+      summary: Funding rate metadata (caps, intervals) per symbol
+      operationId: funding_info
+      parameters:
+      - name: symbol
+        in: query
+        description: Symbol
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Funding info
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FundingInfo'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Market not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /fapi/v1/fundingRate:
+    get:
+      tags:
+      - Market-Data
+      summary: Latest price for a symbol or symbols
+      operationId: funding_rate
+      parameters:
+      - name: symbol
+        in: query
+        description: Symbol
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Funding Rate
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FundingRate'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Market not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /fapi/v1/insuranceBalance:
+    get:
+      tags:
+      - Market-Data
+      summary: Query Insurance Fund Balance Snapshot
+      operationId: insurance_balance
+      responses:
+        '200':
+          description: Insurance Fund Balance Snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceBalance'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /fapi/v1/openInterest:
+    get:
+      tags:
+      - Market-Data
+      summary: Open interest per market
+      operationId: open_interest
+      responses:
+        '200':
+          description: Open Interest
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OpenInterest'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '503':
+          description: Historical data service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /fapi/v1/premiumIndex:
+    get:
+      tags:
+      - Market-Data
+      summary: Mark price, index price, and estimated funding rate per symbol
+      operationId: premium_index
+      parameters:
+      - name: symbol
+        in: query
+        description: Symbol
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Premium index
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PremiumIndex'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Market not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /fapi/v1/ticker/24hr:
+    get:
+      tags:
+      - Market-Data
+      summary: '24 hour rolling window price change statistics.
+
+        returns all markets — no per-symbol filtering (intentional, dataset is small)'
+      operationId: ticker_24hr
+      responses:
+        '200':
+          description: 24hr ticker statistics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ticker24hr'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '503':
+          description: Historical data service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /fapi/v1/ticker/price:
+    get:
+      tags:
+      - Market-Data
+      summary: Latest price for a symbol or symbols
+      operationId: ticker_price
+      parameters:
+      - name: symbol
+        in: query
+        description: Symbol
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Price ticker
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PriceTicker'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Market not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /fapi/v1/trades:
+    get:
+      tags:
+      - Market-Data
+      summary: Recent Trades List
+      operationId: recent_trades
+      parameters:
+      - name: symbol
+        in: query
+        description: Symbol
+        required: true
+        schema:
+          type: string
+        example: BTC-USD
+      - name: limit
+        in: query
+        description: Default 100; max 1000
+        required: false
+        schema:
+          type: integer
+          format: int32
+        example: 100
+      responses:
+        '200':
+          description: List of recent trades
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trade'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '404':
+          description: Market not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '503':
+          description: Historical data service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+components:
+  schemas:
+    InsuranceAsset:
+      type: object
+      required:
+      - asset
+      - marginBalance
+      - updateTime
+      properties:
+        asset:
+          type: string
+        marginBalance:
+          type: string
+          format: decimal
+        updateTime:
+          type: integer
+          format: int64
+    OpenInterest:
+      type: object
+      description: open interest for a single market
+      required:
+      - symbol
+      - openInterest
+      - time
+      properties:
+        openInterest:
+          type: string
+          format: decimal
+        symbol:
+          type: string
+        time:
+          type: integer
+          format: int64
+    ExchangeInfo:
+      type: object
+      required:
+      - rateLimits
+      - assets
+      - symbols
+      - globalConfig
+      properties:
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
+        chainHash:
+          type:
+          - string
+          - 'null'
+        chainInfo:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ChainInfo'
+        globalConfig:
+          $ref: '#/components/schemas/GlobalConfigResponse'
+        rateLimits:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateLimit'
+        symbols:
+          type: array
+          items:
+            $ref: '#/components/schemas/Symbol'
+    FundingRate:
+      type: object
+      required:
+      - symbol
+      - fundingRate
+      - fundingTime
+      - markPrice
+      properties:
+        fundingRate:
+          type: string
+          format: decimal
+        fundingTime:
+          type: integer
+          format: int64
+        markPrice:
+          type: string
+          format: decimal
+        symbol:
+          type: string
+    Symbol:
+      type: object
+      required:
+      - marketId
+      - symbol
+      - pair
+      - contractType
+      - deliveryDate
+      - onboardDate
+      - status
+      - baseAsset
+      - baseAssetId
+      - quoteAsset
+      - marginAsset
+      - pricePrecision
+      - quantityPrecision
+      - baseAssetPrecision
+      - quotePrecision
+      - underlyingType
+      - underlyingSubType
+      - settlePlan
+      - triggerProtect
+      - filters
+      - orderTypes
+      - timeInForce
+      - liquidationFee
+      - marketTakeBound
+      - makerFeeBps
+      - takerFeeBps
+      properties:
+        baseAsset:
+          type: string
+        baseAssetId:
+          type: integer
+          format: uint16
+          minimum: 0
+        baseAssetPrecision:
+          type: integer
+          format: uint8
+          minimum: 0
+        contractType:
+          type: string
+        deliveryDate:
+          type: integer
+          format: int64
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        liquidationFee:
+          type: string
+          format: decimal
+        makerFeeBps:
+          type: array
+          items:
+            type: string
+        marginAsset:
+          type: string
+        marketId:
+          type: integer
+          format: uint16
+          minimum: 0
+        marketTakeBound:
+          type: string
+          format: decimal
+        onboardDate:
+          type: integer
+          format: int64
+        orderTypes:
+          type: array
+          items:
+            type: string
+        pair:
+          type: string
+        pricePrecision:
+          type: integer
+          format: uint8
+          minimum: 0
+        quantityPrecision:
+          type: integer
+          format: uint8
+          minimum: 0
+        quoteAsset:
+          type: string
+        quotePrecision:
+          type: integer
+          format: uint8
+          minimum: 0
+        settlePlan:
+          type: integer
+          format: int32
+        status:
+          type: string
+        symbol:
+          type: string
+        takerFeeBps:
+          type: array
+          items:
+            type: string
+        timeInForce:
+          type: array
+          items:
+            type: string
+        triggerProtect:
+          type: string
+          format: decimal
+        underlyingSubType:
+          type: array
+          items:
+            type: string
+        underlyingType:
+          type: string
+    FundingInfo:
+      type: object
+      description: funding rate metadata per symbol
+      required:
+      - symbol
+      - adjustedFundingRateCap
+      - adjustedFundingRateFloor
+      - fundingIntervalHours
+      properties:
+        adjustedFundingRateCap:
+          type: string
+          format: decimal
+        adjustedFundingRateFloor:
+          type: string
+          format: decimal
+        fundingIntervalHours:
+          type: integer
+          format: int32
+          minimum: 0
+        symbol:
+          type: string
+    PriceTicker:
+      type: object
+      required:
+      - symbol
+      - price
+      - time
+      properties:
+        price:
+          type: string
+          format: decimal
+        symbol:
+          type: string
+        time:
+          type: integer
+          format: int64
+    ChainInfo:
+      type: object
+      description: chain-level constants from the rollup
+      required:
+      - chainId
+      - chainName
+      - gasTokenId
+      - hyperlaneDomain
+      - addressPrefix
+      properties:
+        addressPrefix:
+          type: string
+        chainId:
+          type: integer
+          format: uint64
+          minimum: 0
+        chainName:
+          type: string
+        gasTokenId:
+          type: string
+        hyperlaneDomain:
+          type: integer
+          format: uint64
+          minimum: 0
+    RateParams:
+      type: object
+      required:
+      - optimal_utilisation_rate
+      - min_borrow_rate
+      - optimal_borrow_rate
+      - max_borrow_rate
+      properties:
+        max_borrow_rate:
+          type: string
+          format: decimal
+        min_borrow_rate:
+          type: string
+          format: decimal
+        optimal_borrow_rate:
+          type: string
+          format: decimal
+        optimal_utilisation_rate:
+          type: string
+          format: decimal
+    Trade:
+      type: object
+      required:
+      - id
+      - price
+      - qty
+      - quoteQty
+      - time
+      - isBuyerMaker
+      properties:
+        id:
+          type: integer
+          format: int64
+        isBuyerMaker:
+          type: boolean
+        price:
+          type: string
+          format: decimal
+        qty:
+          type: string
+          format: decimal
+        quoteQty:
+          type: string
+          format: decimal
+        time:
+          type: integer
+          format: int64
+    BorrowLendPoolResponse:
+      type: object
+      required:
+      - asset
+      - assetId
+      - isActive
+      - lastUpdateTimestamp
+      - rateParams
+      - depositLimit
+      - borrowLimit
+      - availableAmount
+      - borrowedAmount
+      - cumulativeDepositRate
+      - cumulativeBorrowRate
+      - accumulatedProtocolFees
+      - unclaimedProtocolFees
+      - interestFeeTenthBps
+      properties:
+        accumulatedProtocolFees:
+          type: string
+          format: decimal
+        asset:
+          type: string
+        assetId:
+          type: integer
+          format: uint16
+          minimum: 0
+        availableAmount:
+          type: string
+          format: decimal
+        borrowLimit:
+          type: string
+          format: decimal
+        borrowedAmount:
+          type: string
+          format: decimal
+        cumulativeBorrowRate:
+          type: string
+          format: decimal
+        cumulativeDepositRate:
+          type: string
+          format: decimal
+        depositLimit:
+          type: string
+          format: decimal
+        interestFeeTenthBps:
+          type: integer
+          format: uint64
+          minimum: 0
+        isActive:
+          type: boolean
+        lastUpdateTimestamp:
+          type: integer
+          format: int64
+        rateParams:
+          $ref: '#/components/schemas/RateParams'
+        unclaimedProtocolFees:
+          type: string
+          format: decimal
+    GlobalConfigResponse:
+      type: object
+      required:
+      - maxOrdersPerUser
+      - maxTriggerOrdersPerUser
+      - maxTriggerOrdersToExecutePerMsg
+      - minNotionalTwapValue
+      - minNotionalTwapValuePerOrder
+      - twapExecutionIntervalSeconds
+      properties:
+        maxOrdersPerUser:
+          type: integer
+          format: uint16
+          minimum: 0
+        maxTriggerOrdersPerUser:
+          type: integer
+          format: uint16
+          minimum: 0
+        maxTriggerOrdersToExecutePerMsg:
+          type: integer
+          format: uint16
+          minimum: 0
+        minNotionalTwapValue:
+          type: string
+          format: decimal
+        minNotionalTwapValuePerOrder:
+          type: string
+          format: decimal
+        twapExecutionIntervalSeconds:
+          type: integer
+          format: uint64
+          minimum: 0
+    PremiumIndex:
+      type: object
+      description: real-time mark price, index price, and estimated funding rate per symbol
+      required:
+      - symbol
+      - markPrice
+      - indexPrice
+      - lastFundingRate
+      - interestRate
+      - estimatedFundingRate
+      - nextFundingTime
+      - time
+      properties:
+        estimatedFundingRate:
+          type: string
+          format: decimal
+          description: pre-computed estimated 1h funding rate (8h rate ÷ 8) from current premium index accumulator
+        indexPrice:
+          type: string
+          format: decimal
+        interestRate:
+          type: string
+          format: decimal
+        lastFundingRate:
+          type: string
+          format: decimal
+          description: funding rate for 8h period
+        markPrice:
+          type: string
+          format: decimal
+        nextFundingTime:
+          type: integer
+          format: int64
+          description: unix timestamp ms of next hourly funding settlement
+        symbol:
+          type: string
+        time:
+          type: integer
+          format: int64
+          description: server time unix ms
+    RateLimit:
+      type: object
+      required:
+      - rateLimitType
+      - interval
+      - intervalNum
+      - limit
+      properties:
+        interval:
+          type: string
+        intervalNum:
+          type: integer
+          format: int32
+        limit:
+          type: integer
+          format: int32
+        rateLimitType:
+          type: string
+    ApiErrorDetail:
+      oneOf:
+      - $ref: '#/components/schemas/JsonValidationErrorDetail'
+      - type: object
+      description: 'Typed details body. Variant order is important for untagged
+
+        deserialization: keep the more-specific shape (`JsonValidation`)
+
+        before more-permissive ones. `Upstream` holds the upstream payload
+
+        verbatim (object, string, array, number, etc.) so pre-PR clients
+
+        reading `details.error` (or `details` directly) keep working.'
+    Filter:
+      oneOf:
+      - type: object
+        required:
+        - tickSize
+        - minPrice
+        - maxPrice
+        - filterType
+        properties:
+          filterType:
+            type: string
+            enum:
+            - PRICE_FILTER
+          maxPrice:
+            type: string
+            format: decimal
+          minPrice:
+            type: string
+            format: decimal
+          tickSize:
+            type: string
+            format: decimal
+      - type: object
+        required:
+        - stepSize
+        - minQty
+        - maxQty
+        - filterType
+        properties:
+          filterType:
+            type: string
+            enum:
+            - LOT_SIZE
+          maxQty:
+            type: string
+            format: decimal
+          minQty:
+            type: string
+            format: decimal
+          stepSize:
+            type: string
+            format: decimal
+      - type: object
+        required:
+        - limit
+        - filterType
+        properties:
+          filterType:
+            type: string
+            enum:
+            - MAX_NUM_ORDERS
+          limit:
+            type: integer
+            format: uint16
+            minimum: 0
+      - type: object
+        required:
+        - limit
+        - filterType
+        properties:
+          filterType:
+            type: string
+            enum:
+            - MAX_NUM_ALGO_ORDERS
+          limit:
+            type: integer
+            format: uint16
+            minimum: 0
+      - type: object
+        required:
+        - multiplierUp
+        - multiplierDown
+        - multiplierDecimal
+        - filterType
+        properties:
+          filterType:
+            type: string
+            enum:
+            - PERCENT_PRICE
+          multiplierDecimal:
+            type: string
+          multiplierDown:
+            type: string
+            format: decimal
+          multiplierUp:
+            type: string
+            format: decimal
+    Asset:
+      type: object
+      required:
+      - asset
+      - marginAvailable
+      - assetId
+      - decimals
+      - withdrawFee
+      properties:
+        asset:
+          type: string
+        assetId:
+          type: integer
+          format: uint16
+          minimum: 0
+        decimals:
+          type: integer
+          format: uint8
+          minimum: 0
+        marginAvailable:
+          type: boolean
+        tokenId:
+          type:
+          - string
+          - 'null'
+        userDepositLimit:
+          type: string
+          format: decimal
+        withdrawFee:
+          type: string
+          format: decimal
+    JsonValidationErrorDetail:
+      type: object
+      description: 'One JSON shape failure: machine-readable `rule` + full serde
+
+        message including line/column. Surfaced under `details` on the wire.'
+      required:
+      - rule
+      - message
+      properties:
+        message:
+          type: string
+          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
+        rule:
+          type: string
+          example: wrong_type
+    InsuranceBalance:
+      type: object
+      required:
+      - symbols
+      - assets
+      properties:
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsuranceAsset'
+        symbols:
+          type: array
+          items:
+            type: string
+    ApiErrorResponse:
+      type: object
+      description: 'Structured API error response matching Bullet API format.
+
+
+        All error responses from the trading API conform to this schema.'
+      required:
+      - status
+      - message
+      properties:
+        details:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiErrorDetail'
+            description: Structured per-failure details. Shape depends on the variant.
+        error_id:
+          type:
+          - string
+          - 'null'
+          description: Error identifier for support.
+          example: 8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f
+        message:
+          type: string
+          description: Human-readable error message.
+          example: 'Transaction validation failed: insufficient funds'
+        status:
+          type: integer
+          format: uint16
+          description: HTTP status code.
+          example: 400
+          minimum: 0
+    OrderBook:
+      type: object
+      required:
+      - lastUpdateId
+      - E
+      - T
+      - bids
+      - asks
+      properties:
+        E:
+          type: integer
+          format: int64
+        T:
+          type: integer
+          format: int64
+        asks:
+          type: array
+          items:
+            type: array
+            items: false
+            prefixItems:
+            - type: string
+            - type: string
+        bids:
+          type: array
+          items:
+            type: array
+            items: false
+            prefixItems:
+            - type: string
+            - type: string
+        lastUpdateId:
+          type: integer
+          format: uint64
+          minimum: 0
+    Ticker24hr:
+      type: object
+      required:
+      - symbol
+      - priceChange
+      - priceChangePercent
+      - weightedAvgPrice
+      - lastPrice
+      - openPrice
+      - highPrice
+      - lowPrice
+      - volume
+      - quoteVolume
+      - openTime
+      - closeTime
+      - count
+      properties:
+        closeTime:
+          type: integer
+          format: int64
+        count:
+          type: integer
+          format: int64
+          minimum: 0
+        highPrice:
+          type: string
+          format: decimal
+        lastPrice:
+          type: string
+          format: decimal
+        lowPrice:
+          type: string
+          format: decimal
+        openPrice:
+          type: string
+          format: decimal
+        openTime:
+          type: integer
+          format: int64
+        priceChange:
+          type: string
+          format: decimal
+        priceChangePercent:
+          type: string
+          format: decimal
+        quoteVolume:
+          type: string
+          format: decimal
+        symbol:
+          type: string
+        volume:
+          type: string
+          format: decimal
+        weightedAvgPrice:
+          type: string
+          format: decimal

@@ -1,0 +1,114 @@
+openapi: 3.1.0
+info:
+  title: Bullet Trading Account Health API
+  description: REST API for the Bullet exchange. Provides Binance FAPI-compatible endpoints for trading, account management, and market data.
+  contact:
+    name: Bullet
+    url: https://bullet.xyz
+  license:
+    name: Proprietary
+  version: 0.1.0
+servers:
+- url: /
+  description: Current server
+- url: https://tradingapi.mainnet.bullet.xyz
+  description: Mainnet
+- url: https://tradingapi.testnet.bullet.xyz
+  description: Testnet
+- url: https://tradingapi.staging.bullet.xyz
+  description: Staging
+tags:
+- name: Health
+paths:
+  /fapi/v1/ping:
+    get:
+      tags:
+      - Health
+      summary: Test connectivity to the Rest API
+      operationId: ping
+      responses:
+        '200':
+          description: Ping successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingResponse'
+  /fapi/v1/time:
+    get:
+      tags:
+      - Health
+      summary: Test connectivity to the Rest API and get the current server time
+      operationId: time
+      responses:
+        '200':
+          description: Server time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeResponse'
+  /health:
+    get:
+      tags:
+      - Health
+      summary: Get health of the API.
+      operationId: health
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+  /health/ready:
+    get:
+      tags:
+      - Health
+      summary: readiness probe — 200 when all components healthy, 503 otherwise
+      operationId: ready
+      responses:
+        '200':
+          description: All components ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadinessStatus'
+        '503':
+          description: Not all components ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadinessStatus'
+components:
+  schemas:
+    HealthState:
+      type: string
+      description: health state for a single component
+      enum:
+      - starting
+      - running
+      - recovering
+    PingResponse:
+      type: object
+    TimeResponse:
+      type: object
+      required:
+      - serverTime
+      properties:
+        serverTime:
+          type: integer
+          format: int64
+    ReadinessStatus:
+      type: object
+      description: readiness response returned by /health/ready
+      required:
+      - ready
+      - components
+      properties:
+        components:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/HealthState'
+          propertyNames:
+            type: string
+        ready:
+          type: boolean

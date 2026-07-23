@@ -1,0 +1,225 @@
+openapi: 3.1.0
+info:
+  title: Bullet Trading Account Tx API
+  description: REST API for the Bullet exchange. Provides Binance FAPI-compatible endpoints for trading, account management, and market data.
+  contact:
+    name: Bullet
+    url: https://bullet.xyz
+  license:
+    name: Proprietary
+  version: 0.1.0
+servers:
+- url: /
+  description: Current server
+- url: https://tradingapi.mainnet.bullet.xyz
+  description: Mainnet
+- url: https://tradingapi.testnet.bullet.xyz
+  description: Testnet
+- url: https://tradingapi.staging.bullet.xyz
+  description: Staging
+tags:
+- name: Tx
+paths:
+  /tx/submit:
+    post:
+      summary: Submit a transaction to the rollup.
+      operationId: submit_tx
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitTxRequest'
+        required: true
+      responses:
+        '200':
+          description: Transaction submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitTxResponse'
+        '400':
+          description: Invalid transaction format or validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '401':
+          description: Invalid signature or public key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '502':
+          description: Upstream service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '503':
+          description: Validation service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+      - Tx
+components:
+  schemas:
+    ModuleRef:
+      type: object
+      description: Reference to a module
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Module name
+    ApiErrorDetail:
+      oneOf:
+      - $ref: '#/components/schemas/JsonValidationErrorDetail'
+      - type: object
+      description: 'Typed details body. Variant order is important for untagged
+
+        deserialization: keep the more-specific shape (`JsonValidation`)
+
+        before more-permissive ones. `Upstream` holds the upstream payload
+
+        verbatim (object, string, array, number, etc.) so pre-PR clients
+
+        reading `details.error` (or `details` directly) keep working.'
+    SubmitTxResponse:
+      type: object
+      description: Response from submitting a transaction.
+      required:
+      - id
+      - status
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/LedgerEvent'
+          description: Events emitted by the transaction
+        id:
+          type: string
+          description: The transaction hash
+        receipt:
+          $ref: '#/components/schemas/TxReceipt'
+          description: Transaction receipt (if processed)
+        status:
+          $ref: '#/components/schemas/TxStatus'
+          description: Transaction status
+        tx_number:
+          type: integer
+          format: uint64
+          description: Transaction number (if processed)
+          minimum: 0
+    LedgerEvent:
+      type: object
+      description: Ledger event emitted by a transaction
+      required:
+      - type
+      - number
+      - key
+      - value
+      - module
+      properties:
+        key:
+          type: string
+          description: Event key
+        module:
+          $ref: '#/components/schemas/ModuleRef'
+          description: Module that emitted the event
+        number:
+          type: integer
+          format: uint64
+          description: Event number
+          minimum: 0
+        tx_hash:
+          type: string
+          description: Transaction hash (if associated with a transaction)
+        type:
+          type: string
+          description: Event type
+        value:
+          type: object
+          description: Event value (arbitrary JSON)
+    JsonValidationErrorDetail:
+      type: object
+      description: 'One JSON shape failure: machine-readable `rule` + full serde
+
+        message including line/column. Surfaced under `details` on the wire.'
+      required:
+      - rule
+      - message
+      properties:
+        message:
+          type: string
+          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
+        rule:
+          type: string
+          example: wrong_type
+    TxStatus:
+      type: string
+      description: Transaction status
+      enum:
+      - unknown
+      - dropped
+      - submitted
+      - published
+      - processed
+      - finalized
+    SubmitTxRequest:
+      type: object
+      required:
+      - body
+      properties:
+        body:
+          type: string
+          description: Base64 encoded borsh string
+    ApiErrorResponse:
+      type: object
+      description: 'Structured API error response matching Bullet API format.
+
+
+        All error responses from the trading API conform to this schema.'
+      required:
+      - status
+      - message
+      properties:
+        details:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiErrorDetail'
+            description: Structured per-failure details. Shape depends on the variant.
+        error_id:
+          type:
+          - string
+          - 'null'
+          description: Error identifier for support.
+          example: 8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f
+        message:
+          type: string
+          description: Human-readable error message.
+          example: 'Transaction validation failed: insufficient funds'
+        status:
+          type: integer
+          format: uint16
+          description: HTTP status code.
+          example: 400
+          minimum: 0
+    TxResult:
+      type: string
+      description: Transaction execution result
+      enum:
+      - successful
+      - reverted
+      - skipped
+    TxReceipt:
+      type: object
+      description: Transaction receipt
+      required:
+      - result
+      properties:
+        result:
+          $ref: '#/components/schemas/TxResult'
+          description: Result of transaction execution
