@@ -1,0 +1,47 @@
+arazzo: 1.0.1
+info:
+  title: Bullet market-data snapshot
+  version: 1.0.0
+  summary: Discover markets then pull the order book, 24h ticker, and recent trades for a symbol.
+sourceDescriptions:
+- name: bulletTradingApi
+  url: ../openapi/bullet-trading-api-openapi.json
+  type: openapi
+workflows:
+- workflowId: market-data-snapshot
+  summary: Fetch exchange info, then order book, ticker, and recent trades for a symbol.
+  inputs:
+    type: object
+    properties:
+      symbol:
+        type: string
+        default: BTC-USD
+  steps:
+  - stepId: getExchangeInfo
+    operationId: exchange_info
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: getOrderBook
+    operationId: order_book
+    parameters:
+    - name: symbol
+      in: query
+      value: $inputs.symbol
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: getTicker24hr
+    operationId: ticker_24hr
+    parameters:
+    - name: symbol
+      in: query
+      value: $inputs.symbol
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: getRecentTrades
+    operationId: recent_trades
+    parameters:
+    - name: symbol
+      in: query
+      value: $inputs.symbol
+    successCriteria:
+    - condition: $statusCode == 200

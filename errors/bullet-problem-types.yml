@@ -1,0 +1,37 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/bullet-trading-api-openapi.json
+format: custom
+envelope:
+  media_type: application/json
+  schema: ApiErrorResponse
+  fields:
+    status: HTTP status code (integer)
+    message: human-readable error message (string)
+    error_id: server-assigned error identifier for support/tracing (string, nullable)
+    details: structured detail list (oneOf ApiErrorDetail / JsonValidationErrorDetail)
+problems:
+- status: 400
+  title: Bad request
+  detail: Malformed or invalid request parameters.
+- status: 401
+  title: Invalid Solana signature
+  detail: The submitted ed25519 / Solana signature failed verification. Re-check transaction signing and the signing keypair.
+- status: 404
+  title: Market not found
+  detail: The referenced symbol / marketId does not exist. Fetch /fapi/v1/exchangeInfo for the current symbol set.
+- status: 422
+  title: Simulation request failed validation
+  detail: A /rollup/simulate or transaction request did not pass validation.
+- status: 500
+  title: Internal server error
+  detail: Unexpected server-side error.
+- status: 501
+  title: User rate limit
+  detail: The caller exceeded a user-scoped rate limit.
+- status: 502
+  title: Upstream service unavailable
+  detail: An upstream/sequencer service was unavailable.
+- status: 503
+  title: Validation service unavailable
+  detail: The validation service is not ready (chain_hash not loaded). Retry after the service warms up.

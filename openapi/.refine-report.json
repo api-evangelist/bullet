@@ -1,0 +1,30 @@
+{
+  "provider": "bullet",
+  "sources": [
+    "bullet-account-api-openapi.yml",
+    "bullet-address-api-openapi.yml",
+    "bullet-health-api-openapi.yml",
+    "bullet-market-data-api-openapi.yml",
+    "bullet-rollup-api-openapi.yml",
+    "bullet-solanaoffchaintx-api-openapi.yml",
+    "bullet-trading-api-openapi.yml",
+    "bullet-tx-api-openapi.yml",
+    "bullet-user-data-beta-api-openapi.yml"
+  ],
+  "outputs": [
+    "bullet-account-api-openapi.yml",
+    "bullet-address-api-openapi.yml",
+    "bullet-health-api-openapi.yml",
+    "bullet-market-data-api-openapi.yml",
+    "bullet-rollup-api-openapi.yml",
+    "bullet-solanaoffchaintx-api-openapi.yml",
+    "bullet-trading-api-openapi.yml",
+    "bullet-tx-api-openapi.yml",
+    "bullet-user-data-beta-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

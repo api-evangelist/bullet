@@ -1,0 +1,11 @@
+generated: '2026-07-18'
+method: generated
+skills:
+- file: bullet-market-data.md
+  name: Pull Bullet market data
+  api: openapi/bullet-trading-api-openapi.json
+  operations: [exchange_info, order_book, ticker_24hr, ticker_price, recent_trades, funding_rate, premium_index, open_interest]
+- file: bullet-account-monitoring.md
+  name: Monitor a Bullet account
+  api: openapi/bullet-trading-api-openapi.json
+  operations: [account_info, account_balance, account_config, query_open_orders, query_open_order, all_orders, user_trades, commission_rate, leverage_bracket]

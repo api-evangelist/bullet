@@ -1,0 +1,67 @@
+# Bullet
+
+## Bullet
+
+- [Introduction](https://docs.bullet.xyz/introduction.md): Our quest for high-performance, unstoppable DeFi applications.
+- [The Bullet Thesis](https://docs.bullet.xyz/the-bullet-thesis.md)
+- [Links](https://docs.bullet.xyz/links.md)
+- [Design Goals](https://docs.bullet.xyz/about-bullet/design-goals.md)
+- [Architecture](https://docs.bullet.xyz/about-bullet/architecture.md)
+- [Sequencer](https://docs.bullet.xyz/about-bullet/architecture/sequencer.md)
+- [Full & Light Nodes](https://docs.bullet.xyz/about-bullet/architecture/full-and-light-nodes.md)
+- [Zero-knowledge Virtual Machine](https://docs.bullet.xyz/about-bullet/architecture/zero-knowledge-virtual-machine.md): In development 🛠️
+- [State Database](https://docs.bullet.xyz/about-bullet/architecture/state-database.md)
+- [Data Availability](https://docs.bullet.xyz/about-bullet/architecture/data-availability.md): In development 🛠️
+- [Bridge](https://docs.bullet.xyz/about-bullet/architecture/bridge.md)
+- [Oracle](https://docs.bullet.xyz/about-bullet/architecture/oracle.md)
+- [Gas & Paymaster](https://docs.bullet.xyz/about-bullet/architecture/gas-and-paymaster.md)
+- [Wallet Abstraction](https://docs.bullet.xyz/about-bullet/architecture/wallet-abstraction.md)
+- [Network Specifications](https://docs.bullet.xyz/about-bullet/network-specifications.md)
+- [Build on Bullet](https://docs.bullet.xyz/about-bullet/build-on-bullet.md)
+- [REST/WS APIs](https://docs.bullet.xyz/about-bullet/build-on-bullet/rest-ws-apis.md)
+- [BulletSVM](https://docs.bullet.xyz/about-bullet/build-on-bullet/bulletsvm.md)
+- [Audits](https://docs.bullet.xyz/about-bullet/audits.md)
+- [Products](https://docs.bullet.xyz/exchange/products.md): Bullet offers the trifecta of derivatives, spot and lending products all under the one roof.
+- [Trading](https://docs.bullet.xyz/exchange/trading.md)
+- [Orderbook](https://docs.bullet.xyz/exchange/trading/orderbook.md): The core engine of price discovery on Bullet.
+- [Unified Margin Engine](https://docs.bullet.xyz/exchange/trading/unified-margin-engine.md): Bullet delivers unparalleled capital efficiency and breadth of collateral options through its sophisticated margin and risk system, on par with leading centralized exchanges.
+- [Lending Engine](https://docs.bullet.xyz/exchange/trading/lending-engine.md)
+- [Liquidation](https://docs.bullet.xyz/exchange/trading/liquidation.md): Bullet employs multiple lines of defence to mitigate risk and bad debt from accruing.
+- [Insurance Fund & ADL](https://docs.bullet.xyz/exchange/trading/insurance-fund-and-adl.md): In the event of a Black Swan scenario, these measures ensure the exchange remains solvent while minimising the negative consequences to users.
+- [Funding](https://docs.bullet.xyz/exchange/trading/funding.md): Funding rates are an important rebalancing mechanism with which perpetuals markets track their underlying asset.
+- [Price Indices](https://docs.bullet.xyz/exchange/trading/price-indices.md): Bullet utilizes two key price indices: the Oracle Price and the Mark Price, allowing for fair and accurate references and exchange calculations.
+- [Order Types & TP/SL](https://docs.bullet.xyz/exchange/trading/order-types-and-tp-sl.md): This section outlines the order types and conditional orders available on our exchange.
+- [Vaults](https://docs.bullet.xyz/exchange/trading/vaults.md): Vaults are passive investment strategies on Bullet that also help to bolster the liquidity and safety of the exchange.
+- [Fees](https://docs.bullet.xyz/exchange/trading/fees.md)
+- [Contract Specifications](https://docs.bullet.xyz/exchange/trading/contract-specifications.md)
+- [TradFi Markets](https://docs.bullet.xyz/exchange/trading/tradfi-markets.md): TradFi markets or RWA, allow users to trade perpetual futures markets based on real-world assets
+- [RWA Contract Specifications](https://docs.bullet.xyz/exchange/trading/tradfi-markets/rwa-contract-specifications.md)
+- [Programs](https://docs.bullet.xyz/exchange/programs.md)
+- [Referrals](https://docs.bullet.xyz/exchange/programs/referrals.md)
+- [Affiliates](https://docs.bullet.xyz/exchange/programs/affiliates.md)
+- [Points](https://docs.bullet.xyz/exchange/programs/points.md)
+- [Help Center](https://docs.bullet.xyz/exchange/help-center.md)
+- [Getting Started](https://docs.bullet.xyz/exchange/help-center/getting-started.md)
+- [What wallets does Bullet support](https://docs.bullet.xyz/exchange/help-center/getting-started/what-wallets-does-bullet-support.md)
+- [Bullet Account Setup](https://docs.bullet.xyz/exchange/help-center/getting-started/bullet-account-setup.md)
+- [Log in with a Wallet on Website](https://docs.bullet.xyz/exchange/help-center/getting-started/log-in-with-a-wallet-on-website.md)
+- [Log in with a Wallet on Mobile](https://docs.bullet.xyz/exchange/help-center/getting-started/log-in-with-a-wallet-on-mobile.md)
+- [Add Email, Passkey or Social Login methods](https://docs.bullet.xyz/exchange/help-center/getting-started/add-email-passkey-or-social-login-methods.md)
+- [Connect with Ledger](https://docs.bullet.xyz/exchange/help-center/getting-started/connect-with-ledger.md)
+- [Can't connect to Bullet](https://docs.bullet.xyz/exchange/help-center/getting-started/cant-connect-to-bullet.md)
+- [Deposit & Funds](https://docs.bullet.xyz/exchange/help-center/deposit-and-funds.md)
+- [How to Deposit Funds on your Bullet account](https://docs.bullet.xyz/exchange/help-center/deposit-and-funds/how-to-deposit-funds-on-your-bullet-account.md)
+- [Why is my deposit not showing](https://docs.bullet.xyz/exchange/help-center/deposit-and-funds/why-is-my-deposit-not-showing.md)
+- [Trading & Orders](https://docs.bullet.xyz/exchange/help-center/trading-and-orders.md)
+- [Order Execution](https://docs.bullet.xyz/exchange/help-center/trading-and-orders/order-execution.md)
+- [Price & Charts](https://docs.bullet.xyz/exchange/help-center/trading-and-orders/price-and-charts.md)
+- [Slippage](https://docs.bullet.xyz/exchange/help-center/trading-and-orders/slippage.md)
+- [Funding](https://docs.bullet.xyz/exchange/help-center/trading-and-orders/funding.md): Funding rates are an important rebalancing mechanism with which perpetuals markets track their underlying asset.
+- [Delegate Accounts & API](https://docs.bullet.xyz/exchange/help-center/delegate-accounts-and-api.md)
+- [Why use a Delegate Account](https://docs.bullet.xyz/exchange/help-center/delegate-accounts-and-api/why-use-a-delegate-account.md)
+- [How to create a Delegate Account](https://docs.bullet.xyz/exchange/help-center/delegate-accounts-and-api/how-to-create-a-delegate-account.md)
+- [FAQ](https://docs.bullet.xyz/exchange/help-center/faq.md)
+- [Contact Support](https://docs.bullet.xyz/exchange/help-center/contact-support.md)
+- [Privacy Policy](https://docs.bullet.xyz/legals/privacy-policy.md): Last Updated 06/03/25
+- [Terms & Conditions](https://docs.bullet.xyz/legals/terms-and-conditions.md): Last Updated: July 6 2026
+- [Trading Cups](https://docs.bullet.xyz/campaigns/trading-cups.md)

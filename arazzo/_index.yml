@@ -1,0 +1,7 @@
+generated: '2026-07-18'
+method: derived
+workflows:
+- file: bullet-market-data-snapshot.yml
+  workflowId: market-data-snapshot
+  title: Bullet market-data snapshot
+  summary: Discover markets then pull the order book, 24h ticker, and recent trades for a symbol.

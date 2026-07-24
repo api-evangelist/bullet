@@ -1,0 +1,24 @@
+generated: '2026-07-18'
+method: searched
+source: https://tradingapi.bullet.xyz/docs/sdks.html
+packages:
+- language: rust
+  registry: crates.io
+  name: bullet-rust-sdk
+  url: https://crates.io/crates/bullet-rust-sdk
+  repo: https://github.com/bulletxyz/bullet-rust-sdk
+  install: 'cargo add bullet-rust-sdk'
+  version: 0.0.30
+  official: true
+  notes: >-
+    Core Rust SDK. Type-safe REST client generated from the trading API OpenAPI spec (Progenitor),
+    type-safe WebSocket client, Ed25519 keypair management, and transaction building/signing.
+- language: javascript
+  registry: npm
+  name: '@bulletxyz/sdk-wasm'
+  url: https://www.npmjs.com/package/@bulletxyz/sdk-wasm
+  repo: https://github.com/bulletxyz/bullet-rust-sdk/tree/main/wasm
+  install: 'npm install @bulletxyz/sdk-wasm'
+  version: 0.0.30
+  official: true
+  notes: WebAssembly bindings for the Bullet trading SDK; works in Node.js, browsers, and Deno.

@@ -1,0 +1,22 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/bullet-trading-api-openapi.json
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: OpenAPI 3.1.0 document published (rust/openapi.json in bullet-rust-sdk).
+- id: binance-fapi-compatible
+  conforms: true
+  evidence: Endpoints under /fapi/v1 and /fapi/v3 mirror the Binance USD-M Futures REST API (depth, ticker, exchangeInfo, premiumIndex, fundingRate, account, balance).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use application/json with a custom ApiErrorResponse envelope, not application/problem+json.
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security scheme; writes use ed25519 signed transactions.
+- id: cursor-pagination
+  conforms: true
+  evidence: PaginatedResponse_* schemas with cursor-based pagination on User Data endpoints.
+- id: websocket-streaming
+  conforms: true
+  evidence: Published WebSocket specification at wss://<host>/ws with subscription streams.

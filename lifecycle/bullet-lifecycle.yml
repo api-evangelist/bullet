@@ -1,0 +1,20 @@
+generated: '2026-07-18'
+method: searched
+source: https://tradingapi.bullet.xyz/docs/connectivity.html
+versioning:
+  scheme: uri-path
+  versions: [/fapi/v1, /fapi/v3, /api/v1, /rollup]
+  note: Binance FAPI-compatible path versioning; account endpoints exist at both v1 and v3.
+status_page: https://status.bullet.xyz/
+changelog:
+  repo: https://github.com/bulletxyz/bullet-app-changelog
+audits:
+- date: '2025-07-01'
+  auditor: Sigma Prime
+  report: https://github.com/sigp/public-audits/tree/master/reports/bullet
+deprecation:
+  policy_url: null
+  note: No published deprecation / sunset-header policy found at review time.
+beta_surfaces:
+- User Data (Beta) endpoints (allOrders, userTrades, userDeposits, userWithdrawals, userFundingPayments, userLiquidations)
+deprecated_operations: []

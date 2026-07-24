@@ -1,0 +1,42 @@
+generated: '2026-07-18'
+method: searched
+source: https://tradingapi.bullet.xyz/docs/
+derived_from: openapi/bullet-trading-api-openapi.json
+compatibility: Binance USD-M Futures (FAPI) compatible endpoints for trading, account, and market data.
+authentication:
+  style: ed25519 signed transactions for writes; public read endpoints
+  ref: authentication/bullet-authentication.yml
+base_paths:
+  market_data_and_trading: /fapi/v1
+  account_v3: /fapi/v3
+  exchange: /api/v1
+  rollup: /rollup
+pagination:
+  style: cursor
+  evidence: PaginatedResponse_* schemas and cursor fields on User Data (Beta) endpoints
+  params: [limit, startTime, endTime, cursor]
+timestamps:
+  unit: microseconds since Unix epoch (16 digits)
+  note: >-
+    Binance uses milliseconds (13 digits); divide Bullet timestamps by 1,000 to convert to Binance format.
+error_envelope:
+  media_type: application/json
+  shape: '{ status, message, error_id, details }'
+  ref: errors/bullet-problem-types.yml
+idempotency:
+  supported: false
+  note: >-
+    No documented idempotent-replay contract. Orders accept an optional user-defined u64
+    client_order_id (returned in order updates and usable for cancels), and unsigned transactions
+    carry a uniqueness field, but neither is documented as a request-dedup / idempotency key.
+transaction_signing:
+  flow: build call message -> wrap in UnsignedTransaction (call + uniqueness + tx details) -> sign borsh(unsigned_tx) ++ chain_hash (ed25519) -> wrap in SignedTransaction -> base64 -> POST /tx/submit or WebSocket
+  prerequisites: GET /fapi/v1/exchangeInfo for chainInfo.chainId, chainHash, and the symbols/marketId map
+  ref: https://tradingapi.bullet.xyz/docs/tx-signing.html
+streaming:
+  websocket: 'wss://<host>/ws'
+  model: subscription streams with ping/pong keepalive; JSON messages
+  ref: https://tradingapi.bullet.xyz/docs/ws/
+rate_limits:
+  signaled: true
+  note: Dedicated GET /fapi/v1/rateLimit/order endpoint; HTTP 501 is returned as "User rate limit".

@@ -1,8 +1,25 @@
 aid: bullet
 name: Bullet
-description: 'Bullet is a company surfaced as a portfolio company of electric-capital and added to the
-  API Evangelist network as a stub for enrichment. Sector: defi. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: >-
+  Bullet is Solana's high-performance trading layer — a decentralized exchange offering perpetual
+  futures (derivatives), spot, and lending under one unified margin engine. The Bullet Trading API
+  is a Binance USD-M Futures (FAPI) compatible REST and WebSocket interface for market data, account
+  and position management, and order placement via ed25519-signed transactions, with official Rust
+  and WASM/TypeScript SDKs. Bullet runs as a sovereign rollup settling to Solana mainnet-beta, with
+  a testnet environment for building and testing against mock assets.
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://tradingapi.bullet.xyz/docs/favicon-de23e50b.svg
 url: https://raw.githubusercontent.com/api-evangelist/bullet/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,16 +29,220 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
-- Defi
-apis: []
+- DeFi
+- Solana
+- Cryptocurrency
+- Derivatives
+- Exchange
+- Trading
+- Perpetuals
+- Lending
+- Blockchain
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: bullet:bullet-account-api
+  name: Bullet Account API
+  description: The Account API from Bullet — 8 operation(s) for account.
+  humanURL: https://tradingapi.bullet.xyz/docs/
+  baseURL: https://tradingapi.bullet.xyz
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/bullet-account-api-openapi.yml
+  - type: Documentation
+    url: https://tradingapi.bullet.xyz/docs/
+  - type: WebSocket
+    url: https://tradingapi.bullet.xyz/docs/ws/
+- aid: bullet:bullet-address-api
+  name: Bullet Address API
+  description: The Address API from Bullet — 1 operation(s) for address.
+  humanURL: https://tradingapi.bullet.xyz/docs/
+  baseURL: https://tradingapi.bullet.xyz
+  tags:
+  - Address
+  properties:
+  - type: OpenAPI
+    url: openapi/bullet-address-api-openapi.yml
+  - type: Documentation
+    url: https://tradingapi.bullet.xyz/docs/
+  - type: WebSocket
+    url: https://tradingapi.bullet.xyz/docs/ws/
+- aid: bullet:bullet-health-api
+  name: Bullet Health API
+  description: The Health API from Bullet — 4 operation(s) for health.
+  humanURL: https://tradingapi.bullet.xyz/docs/
+  baseURL: https://tradingapi.bullet.xyz
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/bullet-health-api-openapi.yml
+  - type: Documentation
+    url: https://tradingapi.bullet.xyz/docs/
+  - type: WebSocket
+    url: https://tradingapi.bullet.xyz/docs/ws/
+- aid: bullet:bullet-market-data-api
+  name: Bullet Market-Data API
+  description: The Market-Data API from Bullet — 11 operation(s) for market-data.
+  humanURL: https://tradingapi.bullet.xyz/docs/
+  baseURL: https://tradingapi.bullet.xyz
+  tags:
+  - Market-Data
+  properties:
+  - type: OpenAPI
+    url: openapi/bullet-market-data-api-openapi.yml
+  - type: Documentation
+    url: https://tradingapi.bullet.xyz/docs/
+  - type: WebSocket
+    url: https://tradingapi.bullet.xyz/docs/ws/
+- aid: bullet:bullet-rollup-api
+  name: Bullet Rollup API
+  description: The Rollup API from Bullet — 3 operation(s) for rollup.
+  humanURL: https://tradingapi.bullet.xyz/docs/
+  baseURL: https://tradingapi.bullet.xyz
+  tags:
+  - Rollup
+  properties:
+  - type: OpenAPI
+    url: openapi/bullet-rollup-api-openapi.yml
+  - type: Documentation
+    url: https://tradingapi.bullet.xyz/docs/
+  - type: WebSocket
+    url: https://tradingapi.bullet.xyz/docs/ws/
+- aid: bullet:bullet-solanaoffchaintx-api
+  name: Bullet SolanaOffchainTx API
+  description: The SolanaOffchainTx API from Bullet — 1 operation(s) for solanaoffchaintx.
+  humanURL: https://tradingapi.bullet.xyz/docs/
+  baseURL: https://tradingapi.bullet.xyz
+  tags:
+  - SolanaOffchainTx
+  properties:
+  - type: OpenAPI
+    url: openapi/bullet-solanaoffchaintx-api-openapi.yml
+  - type: Documentation
+    url: https://tradingapi.bullet.xyz/docs/
+  - type: WebSocket
+    url: https://tradingapi.bullet.xyz/docs/ws/
+- aid: bullet:bullet-trading-api
+  name: Bullet Trading API
+  description: The Trading API from Bullet — 2 operation(s) for trading.
+  humanURL: https://tradingapi.bullet.xyz/docs/
+  baseURL: https://tradingapi.bullet.xyz
+  tags:
+  - Trading
+  properties:
+  - type: OpenAPI
+    url: openapi/bullet-trading-api-openapi.yml
+  - type: Documentation
+    url: https://tradingapi.bullet.xyz/docs/
+  - type: WebSocket
+    url: https://tradingapi.bullet.xyz/docs/ws/
+- aid: bullet:bullet-tx-api
+  name: Bullet Tx API
+  description: The Tx API from Bullet — 1 operation(s) for tx.
+  humanURL: https://tradingapi.bullet.xyz/docs/
+  baseURL: https://tradingapi.bullet.xyz
+  tags:
+  - Tx
+  properties:
+  - type: OpenAPI
+    url: openapi/bullet-tx-api-openapi.yml
+  - type: Documentation
+    url: https://tradingapi.bullet.xyz/docs/
+  - type: WebSocket
+    url: https://tradingapi.bullet.xyz/docs/ws/
+- aid: bullet:bullet-user-data-beta-api
+  name: Bullet User Data (Beta) API
+  description: The User Data (Beta) API from Bullet — 6 operation(s) for user data (beta).
+  humanURL: https://tradingapi.bullet.xyz/docs/
+  baseURL: https://tradingapi.bullet.xyz
+  tags:
+  - User Data (Beta)
+  properties:
+  - type: OpenAPI
+    url: openapi/bullet-user-data-beta-api-openapi.yml
+  - type: Documentation
+    url: https://tradingapi.bullet.xyz/docs/
+  - type: WebSocket
+    url: https://tradingapi.bullet.xyz/docs/ws/
 common:
+- type: OpenAPI
+  url: openapi/bullet-trading-api-openapi.json
+- type: DeveloperPortal
+  url: https://docs.bullet.xyz/
+- type: Documentation
+  url: https://docs.bullet.xyz/
+- type: APIReference
+  url: https://tradingapi.bullet.xyz/docs/
+- type: GettingStarted
+  url: https://tradingapi.bullet.xyz/docs/getting-started.html
+- type: Authentication
+  url: authentication/bullet-authentication.yml
+- type: Packages
+  url: packages/bullet-packages.yml
+- type: SDKs
+  url: packages/bullet-packages.yml
+- type: Sandbox
+  url: sandbox/bullet-sandbox.yml
+- type: Conventions
+  url: conventions/bullet-conventions.yml
+- type: ErrorCatalog
+  url: errors/bullet-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/bullet-lifecycle.yml
+- type: StatusPage
+  url: https://status.bullet.xyz/
+- type: Conformance
+  url: conformance/bullet-conformance.yml
+- type: DataModel
+  url: data-model/bullet-data-model.yml
+- type: MCPServer
+  url: mcp/bullet-mcp.yml
+- type: LLMsTxt
+  url: llms/bullet-llms.txt
+- type: Overlay
+  url: overlays/bullet-trading-api-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Arazzo
+  name: Bullet market-data snapshot
+  url: arazzo/bullet-market-data-snapshot.yml
+- type: WellKnown
+  url: well-known/bullet-well-known.yml
+- type: DomainSecurity
+  url: security/bullet-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/bullet-agentic-access.yml
+- type: GitHubOrganization
+  url: https://github.com/bulletxyz
+- type: Support
+  url: https://docs.bullet.xyz/exchange/help-center/contact-support.md
+- type: Pricing
+  url: https://docs.bullet.xyz/exchange/trading/fees.md
+- type: SignUp
+  url: https://app.bullet.xyz/
+- type: TermsOfService
+  url: https://docs.bullet.xyz/legals/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://docs.bullet.xyz/legals/privacy-policy
 - type: Website
   url: https://www.bullet.xyz/
+- type: X
+  url: https://x.com/bulletxyz
+- type: Discord
+  url: https://discord.com/invite/QuP3YsRAtx
+- type: Telegram
+  url: https://t.me/bullet_xyz
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

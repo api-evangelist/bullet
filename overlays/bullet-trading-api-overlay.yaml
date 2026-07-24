@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Bullet Trading API
+  version: 1.0.0
+extends: openapi/bullet-trading-api-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: bullet
+    x-apievangelist-compatibility: Binance USD-M Futures (FAPI) compatible
+    x-apievangelist-auth: ed25519 signed transactions for writes; public read endpoints
+    x-apievangelist-conventions: conventions/bullet-conventions.yml
+    x-apievangelist-errors: errors/bullet-problem-types.yml
+- target: $.info
+  update:
+    x-apievangelist-websocket: 'wss://<host>/ws'
+    x-apievangelist-status-page: https://status.bullet.xyz/
+    x-apievangelist-sdks:
+    - https://crates.io/crates/bullet-rust-sdk
+    - https://www.npmjs.com/package/@bulletxyz/sdk-wasm

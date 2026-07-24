@@ -1,0 +1,206 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/bullet-trading-api-openapi.json
+schema_count: 71
+entities:
+- name: Account
+  fields: [assets, availableBalance, feeDiscountBps, feeTier, maxWithdrawAmount, positions, totalCrossUnPnl, totalCrossWalletBalance, totalInitialMargin, totalMaintMargin, totalMarginBalance, totalOpenOrderInitialMargin]
+- name: AccountAsset
+  fields: [asset, assetId, updateTime, walletBalance]
+- name: AccountBalance
+  fields: [account, assets, rewards]
+- name: AccountBalanceSummary
+  fields: [tradingCredits, unrealizedLossBorrow]
+- name: AccountPosition
+  fields: [entryPrice, initialMargin, maintMargin, marketId, positionAmt, positionSide, symbol, unrealizedProfit, updateTime]
+- name: AddressState
+  fields: [address, generation]
+- name: ApiErrorResponse
+  fields: [details, error_id, message, status]
+- name: Asset
+  fields: [asset, assetId, decimals, marginAvailable, tokenId, userDepositLimit, withdrawFee]
+- name: AssetBalance
+  fields: [asset, assetAmount, assetId, balance, liabilityAmount, maxWithdrawAmount, updateTime]
+- name: AssetReward
+  fields: [asset, assetId, claimedAmount, cumulativeAmount, unclaimedAmount, variant]
+- name: Balance
+  fields: [accountAlias, asset, availableBalance, balance, crossUnPnl, crossWalletBalance, marginAvailable, maxWithdrawAmount, updateTime]
+- name: BinanceOrder
+  fields: [avgPrice, clientOrderId, closePosition, cumQty, cumQuote, executedQty, goodTillDate, isTrigger, marketId, orderId, orderType, origQty]
+- name: BorrowLendPoolResponse
+  fields: [accumulatedProtocolFees, asset, assetId, availableAmount, borrowLimit, borrowedAmount, cumulativeBorrowRate, cumulativeDepositRate, depositLimit, interestFeeTenthBps, isActive, lastUpdateTimestamp]
+- name: Bracket
+  fields: [bracket, cum, initialLeverage, maintMarginRatio, notionalCap, notionalFloor]
+- name: ChainInfo
+  fields: [addressPrefix, chainId, chainName, gasTokenId, hyperlaneDomain]
+- name: Delegate
+  fields: [address, expiresAt, flags, name]
+- name: ExchangeInfo
+  fields: [assets, chainHash, chainInfo, globalConfig, rateLimits, symbols]
+- name: FundingInfo
+  fields: [adjustedFundingRateCap, adjustedFundingRateFloor, fundingIntervalHours, symbol]
+- name: FundingRate
+  fields: [fundingRate, fundingTime, markPrice, symbol]
+- name: GlobalConfigResponse
+  fields: [maxOrdersPerUser, maxTriggerOrdersPerUser, maxTriggerOrdersToExecutePerMsg, minNotionalTwapValue, minNotionalTwapValuePerOrder, twapExecutionIntervalSeconds]
+- name: HistoricalOrder
+  fields: [avgPrice, closePosition, executedQty, orderId, origQty, positionSide, price, reduceOnly, side, status, symbol, time]
+- name: InsuranceAsset
+  fields: [asset, marginBalance, updateTime]
+- name: InsuranceBalance
+  fields: [assets, symbols]
+- name: JsonValidationErrorDetail
+  fields: [message, rule]
+- name: LedgerEvent
+  fields: [key, module, number, tx_hash, type, value]
+- name: LeverageBracket
+  fields: [brackets, notionalCoef, symbol]
+- name: OpenInterest
+  fields: [openInterest, symbol, time]
+- name: OrderBook
+  fields: [E, T, asks, bids, lastUpdateId]
+- name: PaginatedResponse_HistoricalOrder
+  fields: [data, nextCursor]
+- name: PaginatedResponse_UserDeposit
+  fields: [data, nextCursor]
+- name: PaginatedResponse_UserFundingPayment
+  fields: [data, nextCursor]
+- name: PaginatedResponse_UserLiquidation
+  fields: [data, nextCursor]
+- name: PaginatedResponse_UserTrade
+  fields: [data, nextCursor]
+- name: PaginatedResponse_UserWithdrawal
+  fields: [data, nextCursor]
+- name: PendingTpsl
+  fields: [dynamicSize, sl, tp]
+- name: PremiumIndex
+  fields: [estimatedFundingRate, indexPrice, interestRate, lastFundingRate, markPrice, nextFundingTime, symbol, time]
+- name: PriceTicker
+  fields: [price, symbol, time]
+- name: RateLimit
+  fields: [interval, intervalNum, limit, rateLimitType]
+- name: RateParams
+  fields: [max_borrow_rate, min_borrow_rate, optimal_borrow_rate, optimal_utilisation_rate]
+- name: ReadinessStatus
+  fields: [components, ready]
+- name: RollupConstants
+  fields: [address_prefix, chain_id, chain_name, gas_token_id, hyperlane_domain]
+- name: SubmitTxResponse
+  fields: [events, id, receipt, status, tx_number]
+- name: Symbol
+  fields: [baseAsset, baseAssetId, baseAssetPrecision, contractType, deliveryDate, filters, liquidationFee, makerFeeBps, marginAsset, marketId, marketTakeBound, onboardDate]
+- name: Ticker24hr
+  fields: [closeTime, count, highPrice, lastPrice, lowPrice, openPrice, openTime, priceChange, priceChangePercent, quoteVolume, symbol, volume]
+- name: TpslLeg
+  fields: [orderPrice, orderType, priceCondition, timeInForce, triggerOrderId, triggerPrice]
+- name: Trade
+  fields: [id, isBuyerMaker, price, qty, quoteQty, time]
+- name: UserDeposit
+  fields: [amount, amountNotional, asset, assetId, eventNumber, time, txHash]
+- name: UserFundingPayment
+  fields: [eventNumber, fundingApplied, marketId, symbol, time, txHash]
+- name: UserLiquidation
+  fields: [eventNumber, liquidateeAddress, liquidatorAddress, liquidatorReward, markPrice, marketId, realizedPnl, side, size, symbol, time, txHash]
+- name: UserTrade
+  fields: [address, buyer, clientOrderId, commission, commissionAsset, id, maker, orderId, positionSide, price, qty, quoteQty]
+- name: UserWithdrawal
+  fields: [amount, amountNotional, asset, assetId, eventNumber, fee, time, txHash]
+- name: SimulateParameters
+  fields: [call, sender, sequencer, tx_details, uniqueness]
+- name: SuccessOutcome
+  fields: [events, gas_used, priority_fee]
+- name: SimulatedEvent
+  fields: [key, module, value]
+- name: SequencerParameter
+  fields: [da_address, rollup_address]
+- name: TxDetailsParameter
+  fields: [gas_limit, max_fee, max_priority_fee_bips]
+relationships:
+- from: Account
+  type: has_many
+  to: AccountAsset
+  via: assets
+- from: Account
+  type: has_many
+  to: AccountPosition
+  via: positions
+- from: AccountBalance
+  type: has_one
+  to: AccountBalanceSummary
+  via: account
+- from: AccountBalance
+  type: has_many
+  to: AssetBalance
+  via: assets
+- from: AccountBalance
+  type: has_many
+  to: AssetReward
+  via: rewards
+- from: AccountConfig
+  type: has_many
+  to: Delegate
+  via: delegates
+- from: BorrowLendPoolResponse
+  type: has_one
+  to: RateParams
+  via: rateParams
+- from: ExchangeInfo
+  type: has_many
+  to: Asset
+  via: assets
+- from: ExchangeInfo
+  type: has_one
+  to: GlobalConfigResponse
+  via: globalConfig
+- from: ExchangeInfo
+  type: has_many
+  to: RateLimit
+  via: rateLimits
+- from: ExchangeInfo
+  type: has_many
+  to: Symbol
+  via: symbols
+- from: InsuranceBalance
+  type: has_many
+  to: InsuranceAsset
+  via: assets
+- from: LedgerEvent
+  type: has_one
+  to: ModuleRef
+  via: module
+- from: LeverageBracket
+  type: has_many
+  to: Bracket
+  via: brackets
+- from: SubmitTxResponse
+  type: has_many
+  to: LedgerEvent
+  via: events
+- from: SubmitTxResponse
+  type: has_one
+  to: TxReceipt
+  via: receipt
+- from: SubmitTxResponse
+  type: has_one
+  to: TxStatus
+  via: status
+- from: Symbol
+  type: has_many
+  to: Filter
+  via: filters
+- from: TxReceipt
+  type: has_one
+  to: TxResult
+  via: result
+- from: SimulateParameters
+  type: has_one
+  to: SequencerParameter
+  via: sequencer
+- from: SimulateParameters
+  type: has_one
+  to: TxDetailsParameter
+  via: tx_details
+- from: SuccessOutcome
+  type: has_many
+  to: SimulatedEvent
+  via: events

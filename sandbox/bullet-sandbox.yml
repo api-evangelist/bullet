@@ -1,0 +1,31 @@
+generated: '2026-07-18'
+method: searched
+source: https://tradingapi.bullet.xyz/docs/connectivity.html
+docs:
+- https://docs.bullet.xyz/about-bullet/network-specifications.md
+- https://tradingapi.bullet.xyz/docs/account-setup.html
+environments:
+- name: mainnet
+  rest: https://tradingapi.bullet.xyz
+  websocket: wss://tradingapi.bullet.xyz/ws
+  settlement: Solana mainnet-beta
+- name: testnet
+  rest: https://tradingapi.testnet.bullet.xyz
+  websocket: wss://tradingapi.testnet.bullet.xyz/ws
+  chain_id: 4321
+  settlement: not settled — mock assets
+  data_availability: MockDA (migrating to Solana mainnet)
+  sequencer: https://rollup-testnet.zeta.markets/
+- name: staging
+  rest: https://tradingapi.staging.bullet.xyz
+  websocket: wss://tradingapi.staging.bullet.xyz/ws
+test_mode:
+  description: >-
+    The testnet environment is not settled and uses mock assets, so it functions as the public
+    sandbox for building and testing against the Bullet Trading API without real funds. Generate an
+    ed25519 delegate keypair, register it as a delegate account, and point clients at the testnet
+    host to place and manage orders end-to-end.
+  keypair: Generate an ed25519 delegate keypair locally (or via the app's "Generate" button) and register it as a Delegate Account.
+notes: >-
+  No published test card numbers or magic values (Bullet is a derivatives/spot/lending DEX, not a
+  card acquirer). The sandbox is the testnet environment plus delegate-account key generation.
