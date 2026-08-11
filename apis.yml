@@ -175,7 +175,7 @@ apis:
     url: https://tradingapi.bullet.xyz/docs/ws/
 common:
 - type: OpenAPI
-  url: openapi/bullet-trading-api-openapi.json
+  url: openapi/_original/bullet-trading-api-openapi.json
 - type: DeveloperPortal
   url: https://docs.bullet.xyz/
 - type: Documentation
