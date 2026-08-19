@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bullet Trading Account SolanaOffchainTx API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SolanaOffchainTx",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit a Solana off-chain signed transaction to the rollup.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v1/solanaOffchainTx",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Accepts the JSON envelope produced by the SDK's `solana` / `solanaSimple`\nauthenticator (Phantom, Solflare, Ledger), where the body is signed with\na Solana off-chain message signature rather than a Sovereign credential.\nThe rollup verifies the signature and constructs the inner tx; this route\nis a pass-through proxy and intentionally skips the borsh tx validator."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

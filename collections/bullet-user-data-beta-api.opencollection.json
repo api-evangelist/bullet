@@ -1,0 +1,270 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bullet Trading Account User Data (Beta) API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Data (Beta)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "All Orders (order history from ClickHouse)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/allOrders",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Account address (required on first request, encoded in cursor for subsequent)"
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair symbol (optional filter)"
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "query",
+                "description": "Return orders with orderId >= this value"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time in microseconds"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time in microseconds"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results (default 500, max 1000)"
+              }
+            ]
+          },
+          "docs": "All Orders (order history from ClickHouse)"
+        },
+        {
+          "info": {
+            "name": "User Deposit History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/userDeposits",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Account address (required on first request, encoded in cursor for subsequent)"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time in microseconds"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time in microseconds"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results (default 500, max 1000)"
+              }
+            ]
+          },
+          "docs": "User Deposit History"
+        },
+        {
+          "info": {
+            "name": "User Funding Payment History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/userFundingPayments",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Account address (required on first request, encoded in cursor for subsequent)"
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair symbol (optional filter)"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time in microseconds (optional filter)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time in microseconds (optional filter)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results (default 500, max 1000)"
+              }
+            ]
+          },
+          "docs": "User Funding Payment History"
+        },
+        {
+          "info": {
+            "name": "User Liquidation History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/userLiquidations",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Account address (required on first request, encoded in cursor for subsequent)"
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair symbol (optional filter)"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time in microseconds (optional filter)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time in microseconds (optional filter)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results (default 500, max 1000)"
+              }
+            ]
+          },
+          "docs": "User Liquidation History"
+        },
+        {
+          "info": {
+            "name": "Account Trade List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/userTrades",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Account address (required on first request, encoded in cursor for subsequent)"
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair symbol (optional filter)"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time in microseconds (optional filter)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time in microseconds (optional filter)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results (default 500, max 1000)"
+              }
+            ]
+          },
+          "docs": "Account Trade List"
+        },
+        {
+          "info": {
+            "name": "User Withdrawal History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/userWithdrawals",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Account address (required on first request, encoded in cursor for subsequent)"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time in microseconds"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time in microseconds"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results (default 500, max 1000)"
+              }
+            ]
+          },
+          "docs": "User Withdrawal History"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

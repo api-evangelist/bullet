@@ -1,0 +1,207 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bullet Trading Account Market-Data API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Market-Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Borrow Lend Pools - Doesnt exist in Binance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/borrowLendPools",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Symbol"
+              }
+            ]
+          },
+          "docs": "Borrow Lend Pools - Doesnt exist in Binance"
+        },
+        {
+          "info": {
+            "name": "Get orderbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/depth",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "BTC-USD",
+                "type": "query",
+                "description": "Symbol"
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "type": "query",
+                "description": "Limit (default 20, max 1000)"
+              }
+            ]
+          },
+          "docs": "Get orderbook"
+        },
+        {
+          "info": {
+            "name": "Get current exchange trading rules and symbol information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/exchangeInfo"
+          },
+          "docs": "Get current exchange trading rules and symbol information"
+        },
+        {
+          "info": {
+            "name": "Funding rate metadata (caps, intervals) per symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/fundingInfo",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Symbol"
+              }
+            ]
+          },
+          "docs": "Funding rate metadata (caps, intervals) per symbol"
+        },
+        {
+          "info": {
+            "name": "Latest price for a symbol or symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/fundingRate",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Symbol"
+              }
+            ]
+          },
+          "docs": "Latest price for a symbol or symbols"
+        },
+        {
+          "info": {
+            "name": "Query Insurance Fund Balance Snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/insuranceBalance"
+          },
+          "docs": "Query Insurance Fund Balance Snapshot"
+        },
+        {
+          "info": {
+            "name": "Open interest per market",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/openInterest"
+          },
+          "docs": "Open interest per market"
+        },
+        {
+          "info": {
+            "name": "Mark price, index price, and estimated funding rate per symbol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/premiumIndex",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Symbol"
+              }
+            ]
+          },
+          "docs": "Mark price, index price, and estimated funding rate per symbol"
+        },
+        {
+          "info": {
+            "name": "24 hour rolling window price change statistics.\nreturns all markets — no per-symbol filtering (intentional, dataset is small)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/ticker/24hr"
+          },
+          "docs": "24 hour rolling window price change statistics.\nreturns all markets — no per-symbol filtering (intentional, dataset is small)"
+        },
+        {
+          "info": {
+            "name": "Latest price for a symbol or symbols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/ticker/price",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Symbol"
+              }
+            ]
+          },
+          "docs": "Latest price for a symbol or symbols"
+        },
+        {
+          "info": {
+            "name": "Recent Trades List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/trades",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "BTC-USD",
+                "type": "query",
+                "description": "Symbol"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Default 100; max 1000"
+              }
+            ]
+          },
+          "docs": "Recent Trades List"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

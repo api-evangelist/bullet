@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bullet Trading Account Rollup API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rollup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the rollup constants.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/rollup/constants"
+          },
+          "docs": "Get the rollup constants."
+        },
+        {
+          "info": {
+            "name": "Get the rollup schema (unwrapped).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/rollup/schema"
+          },
+          "docs": "Get the rollup schema (unwrapped)."
+        },
+        {
+          "info": {
+            "name": "Simulate a transaction against the current rollup state without committing.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/rollup/simulate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Pass-through proxy to the sequencer's `/rollup/simulate`. The body is a JSON\n`SimulateParameters` document (runtime `call` + `sender`), NOT a signed borsh\ntx, so this route intentionally skips the tx validators and forwards the\nrequest unchanged — mirroring the rest of the `/rollup/*` passthrough."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -2,160 +2,165 @@ generated: '2026-07-18'
 method: derived
 status: candidate
 source: openapi/bullet-trading-api-openapi.json
-note: >-
-  No official hosted/remote MCP server was found for Bullet at review time. This is a candidate
-  tool list derived one-to-one from the Bullet Trading API OpenAPI operations, provided as a
-  starting point for an MCP server. Read (GET) operations are safe to expose; the POST tx/simulate
-  operations require ed25519-signed transactions.
+note: No official hosted/remote MCP server was found for Bullet at review time. This is a candidate tool
+  list derived one-to-one from the Bullet Trading API OpenAPI operations, provided as a starting point
+  for an MCP server. Read (GET) operations are safe to expose; the POST tx/simulate operations require
+  ed25519-signed transactions.
 server:
   name: bullet
   transport: http
 tools:
 - name: account_config
-  description: "Account Configuration (Bullet-specific)"
+  description: Account Configuration (Bullet-specific)
   source_operation: openapi/bullet-trading-api-openapi.json#account_config
   http: GET /api/v1/accountConfig
 - name: address_state
-  description: "Per-credential on-chain state used by clients when constructing txs."
+  description: Per-credential on-chain state used by clients when constructing txs.
   source_operation: openapi/bullet-trading-api-openapi.json#address_state
   http: GET /api/v1/addressState
 - name: account_balance_bullet
-  description: "Account Balance (Bullet-specific)"
+  description: Account Balance (Bullet-specific)
   source_operation: openapi/bullet-trading-api-openapi.json#account_balance_bullet
   http: GET /api/v1/balance
 - name: submit_solana_offchain_tx
-  description: "Submit a Solana off-chain signed transaction to the rollup."
+  description: Submit a Solana off-chain signed transaction to the rollup.
   source_operation: openapi/bullet-trading-api-openapi.json#submit_solana_offchain_tx
   http: POST /api/v1/solanaOffchainTx
 - name: all_orders
-  description: "All Orders (order history from ClickHouse)"
+  description: All Orders (order history from ClickHouse)
   source_operation: openapi/bullet-trading-api-openapi.json#all_orders
   http: GET /fapi/v1/allOrders
 - name: borrow_lend_pools
-  description: "Borrow Lend Pools - Doesnt exist in Binance"
+  description: Borrow Lend Pools - Doesnt exist in Binance
   source_operation: openapi/bullet-trading-api-openapi.json#borrow_lend_pools
   http: GET /fapi/v1/borrowLendPools
 - name: commission_rate
-  description: "User Commission Rate (USER_DATA)"
+  description: User Commission Rate (USER_DATA)
   source_operation: openapi/bullet-trading-api-openapi.json#commission_rate
   http: GET /fapi/v1/commissionRate
 - name: order_book
-  description: "Get orderbook"
+  description: Get orderbook
   source_operation: openapi/bullet-trading-api-openapi.json#order_book
   http: GET /fapi/v1/depth
 - name: exchange_info
-  description: "Get current exchange trading rules and symbol information"
+  description: Get current exchange trading rules and symbol information
   source_operation: openapi/bullet-trading-api-openapi.json#exchange_info
   http: GET /fapi/v1/exchangeInfo
 - name: funding_info
-  description: "Funding rate metadata (caps, intervals) per symbol"
+  description: Funding rate metadata (caps, intervals) per symbol
   source_operation: openapi/bullet-trading-api-openapi.json#funding_info
   http: GET /fapi/v1/fundingInfo
 - name: funding_rate
-  description: "Latest price for a symbol or symbols"
+  description: Latest price for a symbol or symbols
   source_operation: openapi/bullet-trading-api-openapi.json#funding_rate
   http: GET /fapi/v1/fundingRate
 - name: insurance_balance
-  description: "Query Insurance Fund Balance Snapshot"
+  description: Query Insurance Fund Balance Snapshot
   source_operation: openapi/bullet-trading-api-openapi.json#insurance_balance
   http: GET /fapi/v1/insuranceBalance
 - name: leverage_bracket
-  description: "Notional and Leverage Brackets (USER_DATA)"
+  description: Notional and Leverage Brackets (USER_DATA)
   source_operation: openapi/bullet-trading-api-openapi.json#leverage_bracket
   http: GET /fapi/v1/leverageBracket
 - name: open_interest
-  description: "Open interest per market"
+  description: Open interest per market
   source_operation: openapi/bullet-trading-api-openapi.json#open_interest
   http: GET /fapi/v1/openInterest
 - name: query_open_order
-  description: "Query Current Open Order"
+  description: Query Current Open Order
   source_operation: openapi/bullet-trading-api-openapi.json#query_open_order
   http: GET /fapi/v1/openOrder
 - name: query_open_orders
-  description: "Query All Open Orders"
+  description: Query All Open Orders
   source_operation: openapi/bullet-trading-api-openapi.json#query_open_orders
   http: GET /fapi/v1/openOrders
 - name: ping
-  description: "Test connectivity to the Rest API"
+  description: Test connectivity to the Rest API
   source_operation: openapi/bullet-trading-api-openapi.json#ping
   http: GET /fapi/v1/ping
 - name: premium_index
-  description: "Mark price, index price, and estimated funding rate per symbol"
+  description: Mark price, index price, and estimated funding rate per symbol
   source_operation: openapi/bullet-trading-api-openapi.json#premium_index
   http: GET /fapi/v1/premiumIndex
 - name: rate_limit_order
-  description: "Query User Rate Limit (USER_DATA)"
+  description: Query User Rate Limit (USER_DATA)
   source_operation: openapi/bullet-trading-api-openapi.json#rate_limit_order
   http: GET /fapi/v1/rateLimit/order
 - name: symbol_config
-  description: "Symbol Configuration (USER_DATA)"
+  description: Symbol Configuration (USER_DATA)
   source_operation: openapi/bullet-trading-api-openapi.json#symbol_config
   http: GET /fapi/v1/symbolConfig
 - name: ticker_24hr
-  description: "24 hour rolling window price change statistics."
+  description: 24 hour rolling window price change statistics.
   source_operation: openapi/bullet-trading-api-openapi.json#ticker_24hr
   http: GET /fapi/v1/ticker/24hr
 - name: ticker_price
-  description: "Latest price for a symbol or symbols"
+  description: Latest price for a symbol or symbols
   source_operation: openapi/bullet-trading-api-openapi.json#ticker_price
   http: GET /fapi/v1/ticker/price
 - name: time
-  description: "Test connectivity to the Rest API and get the current server time"
+  description: Test connectivity to the Rest API and get the current server time
   source_operation: openapi/bullet-trading-api-openapi.json#time
   http: GET /fapi/v1/time
 - name: recent_trades
-  description: "Recent Trades List"
+  description: Recent Trades List
   source_operation: openapi/bullet-trading-api-openapi.json#recent_trades
   http: GET /fapi/v1/trades
 - name: user_deposits
-  description: "User Deposit History"
+  description: User Deposit History
   source_operation: openapi/bullet-trading-api-openapi.json#user_deposits
   http: GET /fapi/v1/userDeposits
 - name: user_funding_payments
-  description: "User Funding Payment History"
+  description: User Funding Payment History
   source_operation: openapi/bullet-trading-api-openapi.json#user_funding_payments
   http: GET /fapi/v1/userFundingPayments
 - name: user_liquidations
-  description: "User Liquidation History"
+  description: User Liquidation History
   source_operation: openapi/bullet-trading-api-openapi.json#user_liquidations
   http: GET /fapi/v1/userLiquidations
 - name: user_trades
-  description: "Account Trade List"
+  description: Account Trade List
   source_operation: openapi/bullet-trading-api-openapi.json#user_trades
   http: GET /fapi/v1/userTrades
 - name: user_withdrawals
-  description: "User Withdrawal History"
+  description: User Withdrawal History
   source_operation: openapi/bullet-trading-api-openapi.json#user_withdrawals
   http: GET /fapi/v1/userWithdrawals
 - name: account_info
-  description: "Get current account information"
+  description: Get current account information
   source_operation: openapi/bullet-trading-api-openapi.json#account_info
   http: GET /fapi/v3/account
 - name: account_balance
-  description: "Get account balance"
+  description: Get account balance
   source_operation: openapi/bullet-trading-api-openapi.json#account_balance
   http: GET /fapi/v3/balance
 - name: health
-  description: "Get health of the API."
+  description: Get health of the API.
   source_operation: openapi/bullet-trading-api-openapi.json#health
   http: GET /health
 - name: ready
-  description: "readiness probe — 200 when all components healthy, 503 otherwise"
+  description: readiness probe — 200 when all components healthy, 503 otherwise
   source_operation: openapi/bullet-trading-api-openapi.json#ready
   http: GET /health/ready
 - name: constants
-  description: "Get the rollup constants."
+  description: Get the rollup constants.
   source_operation: openapi/bullet-trading-api-openapi.json#constants
   http: GET /rollup/constants
 - name: schema
-  description: "Get the rollup schema (unwrapped)."
+  description: Get the rollup schema (unwrapped).
   source_operation: openapi/bullet-trading-api-openapi.json#schema
   http: GET /rollup/schema
 - name: submit_tx
-  description: "Submit a transaction to the rollup."
+  description: Submit a transaction to the rollup.
   source_operation: openapi/bullet-trading-api-openapi.json#submit_tx
   http: POST /tx/submit
 - name: simulate
-  description: "Simulate a transaction against the current rollup state without committing."
+  description: Simulate a transaction against the current rollup state without committing.
   source_operation: openapi/bullet-trading-api-openapi.json#simulate
   http: POST /rollup/simulate
+deployment:
+  mode: none
+  verified: derived
+  tools: 37
+  checked: '2026-08-12'
+  source: catalog MCP census

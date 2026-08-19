@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bullet Trading Account Health API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Test connectivity to the Rest API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/ping"
+          },
+          "docs": "Test connectivity to the Rest API"
+        },
+        {
+          "info": {
+            "name": "Test connectivity to the Rest API and get the current server time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/time"
+          },
+          "docs": "Test connectivity to the Rest API and get the current server time"
+        },
+        {
+          "info": {
+            "name": "Get health of the API.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/health"
+          },
+          "docs": "Get health of the API."
+        },
+        {
+          "info": {
+            "name": "readiness probe — 200 when all components healthy, 503 otherwise",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/health/ready"
+          },
+          "docs": "readiness probe — 200 when all components healthy, 503 otherwise"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

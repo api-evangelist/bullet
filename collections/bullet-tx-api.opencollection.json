@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bullet Trading Account Tx API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tx",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit a transaction to the rollup.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/tx/submit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a transaction to the rollup."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

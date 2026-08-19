@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bullet Trading Account Address API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Address",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Per-credential on-chain state used by clients when constructing txs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/addressState",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "signing credential address (base58)"
+              }
+            ]
+          },
+          "docs": "Per-credential on-chain state used by clients when constructing txs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

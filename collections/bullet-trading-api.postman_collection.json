@@ -1,0 +1,662 @@
+{
+  "item": [
+    {
+      "id": "f232d122-40c9-47b6-8a62-7de53d2cc1d0",
+      "name": "Trading",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c2c6789-99bd-4b6f-9a1f-ceaaef44e33b",
+          "name": "Query Current Open Order",
+          "request": {
+            "name": "Query Current Open Order",
+            "description": {},
+            "url": {
+              "path": [
+                "fapi",
+                "v1",
+                "openOrder"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "orderId",
+                  "value": "<integer,null-int64>"
+                },
+                {
+                  "disabled": false,
+                  "key": "clientOrderId",
+                  "value": "<integer,null-int64>"
+                },
+                {
+                  "disabled": false,
+                  "key": "triggerOrderId",
+                  "value": "<integer,null-int64>",
+                  "description": "look up a user trigger order (STOP / TAKE_PROFIT) by its\nTriggerOrderId. mutually exclusive with `orderId` /\n`clientOrderId` — trigger orders use an independent id counter\nfrom regular orders in the rollup"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6c92b6b-433d-4c6c-9b40-e4add0a5ef77",
+              "name": "Open order information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "openOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "triggerOrderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderId\": 8802,\n  \"symbol\": \"string\",\n  \"marketId\": 4624,\n  \"status\": \"string\",\n  \"price\": \"string\",\n  \"avgPrice\": \"string\",\n  \"origQty\": \"string\",\n  \"executedQty\": \"string\",\n  \"cumQty\": \"string\",\n  \"cumQuote\": \"string\",\n  \"timeInForce\": \"string\",\n  \"orderType\": \"string\",\n  \"reduceOnly\": false,\n  \"closePosition\": false,\n  \"side\": \"string\",\n  \"positionSide\": \"string\",\n  \"workingType\": \"string\",\n  \"priceProtect\": true,\n  \"origType\": \"string\",\n  \"priceMatch\": \"string\",\n  \"selfTradePreventionMode\": \"string\",\n  \"goodTillDate\": 659,\n  \"updateTime\": 9811,\n  \"isTrigger\": true,\n  \"clientOrderId\": \"string\",\n  \"pendingTpsl\": null,\n  \"stopPrice\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14977b81-fa9f-46a9-92fe-656e3d208f7e",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "openOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "triggerOrderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "481ecfa4-445e-4ef5-a59a-26432897f590",
+              "name": "Market not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "openOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "triggerOrderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "deb092a5-a7b6-45ea-8fe3-0a83a9c47c71",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "openOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "triggerOrderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc69fd0a-2653-42a9-af4b-deb25b72f3a9",
+              "name": "Upstream service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "openOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "triggerOrderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d04e1301-a200-4bd5-80e1-f8fba4c4f5e6",
+          "name": "Query All Open Orders",
+          "request": {
+            "name": "Query All Open Orders",
+            "description": {},
+            "url": {
+              "path": [
+                "fapi",
+                "v1",
+                "openOrders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string,null>",
+                  "description": "Trading pair symbol — optional, omit to return open orders across all markets"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) Account address"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5a7eec9-55f9-4746-9f76-10cb7146c215",
+              "name": "List of open orders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "openOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"orderId\": 2783,\n    \"symbol\": \"string\",\n    \"marketId\": 8958,\n    \"status\": \"string\",\n    \"price\": \"string\",\n    \"avgPrice\": \"string\",\n    \"origQty\": \"string\",\n    \"executedQty\": \"string\",\n    \"cumQty\": \"string\",\n    \"cumQuote\": \"string\",\n    \"timeInForce\": \"string\",\n    \"orderType\": \"string\",\n    \"reduceOnly\": false,\n    \"closePosition\": false,\n    \"side\": \"string\",\n    \"positionSide\": \"string\",\n    \"workingType\": \"string\",\n    \"priceProtect\": true,\n    \"origType\": \"string\",\n    \"priceMatch\": \"string\",\n    \"selfTradePreventionMode\": \"string\",\n    \"goodTillDate\": 1789,\n    \"updateTime\": 247,\n    \"isTrigger\": true,\n    \"clientOrderId\": \"string\",\n    \"pendingTpsl\": null,\n    \"stopPrice\": \"string\"\n  },\n  {\n    \"orderId\": 1440,\n    \"symbol\": \"string\",\n    \"marketId\": 5360,\n    \"status\": \"string\",\n    \"price\": \"string\",\n    \"avgPrice\": \"string\",\n    \"origQty\": \"string\",\n    \"executedQty\": \"string\",\n    \"cumQty\": \"string\",\n    \"cumQuote\": \"string\",\n    \"timeInForce\": \"string\",\n    \"orderType\": \"string\",\n    \"reduceOnly\": true,\n    \"closePosition\": true,\n    \"side\": \"string\",\n    \"positionSide\": \"string\",\n    \"workingType\": \"string\",\n    \"priceProtect\": true,\n    \"origType\": \"string\",\n    \"priceMatch\": \"string\",\n    \"selfTradePreventionMode\": \"string\",\n    \"goodTillDate\": 1043,\n    \"updateTime\": 8435,\n    \"isTrigger\": false,\n    \"clientOrderId\": \"string\",\n    \"pendingTpsl\": null,\n    \"stopPrice\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af39b0d4-a8cc-4de5-adc4-244d48f71c60",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "openOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "390f478a-649d-4f8d-8eed-b1d8eeaaf034",
+              "name": "Market not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "openOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37196108-d3f1-48fe-ac18-8845f5efca0a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "openOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d9ee06e-7391-4fb1-a565-f6729067af89",
+              "name": "Upstream service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "openOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "66a2f3c5-728d-4429-9219-f44220a540a7",
+    "name": "Bullet Account Trading API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Bullet exchange. Provides Binance FAPI-compatible endpoints for trading, account management, and market data.\n\nContact Support:\n Name: Bullet",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,511 @@
+{
+  "item": [
+    {
+      "id": "c041c600-85b2-4c69-9138-c4b16dea2b30",
+      "name": "Rollup",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dc25980d-64e2-4a54-88ee-8990464599a0",
+          "name": "Get the rollup constants.",
+          "request": {
+            "name": "Get the rollup constants.",
+            "description": {},
+            "url": {
+              "path": [
+                "rollup",
+                "constants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "37eaa788-47f3-4b16-a352-4b7bc2e255de",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rollup",
+                    "constants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"chain_id\": 5318,\n  \"chain_name\": \"string\",\n  \"gas_token_id\": \"string\",\n  \"hyperlane_domain\": 4705,\n  \"address_prefix\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49174108-1941-4069-8441-8a44a9791365",
+              "name": "Constants not available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rollup",
+                    "constants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c569b131-d341-4d07-aa51-4960385dcd1a",
+          "name": "Get the rollup schema (unwrapped).",
+          "request": {
+            "name": "Get the rollup schema (unwrapped).",
+            "description": {},
+            "url": {
+              "path": [
+                "rollup",
+                "schema"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1a224f5-854b-463e-95ef-495bfe1f08c9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rollup",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a11fe8d1-79f5-4ff0-a583-1dffa4ae7f84",
+              "name": "Schema not available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rollup",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11bde7e0-41b0-4842-8e79-9a37c496b1d6",
+          "name": "Simulate a transaction against the current rollup state without committing.",
+          "request": {
+            "name": "Simulate a transaction against the current rollup state without committing.",
+            "description": {
+              "content": "Pass-through proxy to the sequencer's `/rollup/simulate`. The body is a JSON\n`SimulateParameters` document (runtime `call` + `sender`), NOT a signed borsh\ntx, so this route intentionally skips the tx validators and forwards the\nrequest unchanged — mirroring the rest of the `/rollup/*` passthrough.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rollup",
+                "simulate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sender\": \"<string>\",\n  \"call\": \"<object>\",\n  \"sequencer\": {\n    \"da_address\": \"<string>\",\n    \"rollup_address\": \"<string>\"\n  },\n  \"tx_details\": {\n    \"gas_limit\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"max_fee\": \"<string>\",\n    \"max_priority_fee_bips\": \"<uint64>\"\n  },\n  \"uniqueness\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea70922d-db7a-42d5-9f95-68927615098f",
+              "name": "Simulation completed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rollup",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": \"<string>\",\n  \"call\": \"<object>\",\n  \"sequencer\": {\n    \"da_address\": \"string\",\n    \"rollup_address\": \"string\"\n  },\n  \"tx_details\": {\n    \"gas_limit\": [\n      7665,\n      9006\n    ],\n    \"max_fee\": \"string\",\n    \"max_priority_fee_bips\": 6486\n  },\n  \"uniqueness\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"events\": [\n    {\n      \"value\": {},\n      \"key\": \"string\",\n      \"module\": \"string\"\n    },\n    {\n      \"value\": {},\n      \"key\": \"string\",\n      \"module\": \"string\"\n    }\n  ],\n  \"gas_used\": \"string\",\n  \"outcome\": \"success\",\n  \"priority_fee\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7574f65-707e-402a-b258-982ef0fbe938",
+              "name": "Invalid simulation request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rollup",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": \"<string>\",\n  \"call\": \"<object>\",\n  \"sequencer\": {\n    \"da_address\": \"string\",\n    \"rollup_address\": \"string\"\n  },\n  \"tx_details\": {\n    \"gas_limit\": [\n      7665,\n      9006\n    ],\n    \"max_fee\": \"string\",\n    \"max_priority_fee_bips\": 6486\n  },\n  \"uniqueness\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcab10e7-1897-40af-8ec8-90075507783b",
+              "name": "Simulation request failed validation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rollup",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": \"<string>\",\n  \"call\": \"<object>\",\n  \"sequencer\": {\n    \"da_address\": \"string\",\n    \"rollup_address\": \"string\"\n  },\n  \"tx_details\": {\n    \"gas_limit\": [\n      7665,\n      9006\n    ],\n    \"max_fee\": \"string\",\n    \"max_priority_fee_bips\": 6486\n  },\n  \"uniqueness\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0472221c-6a02-4b89-bd76-ecacc69b8fd8",
+              "name": "Simulation failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rollup",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": \"<string>\",\n  \"call\": \"<object>\",\n  \"sequencer\": {\n    \"da_address\": \"string\",\n    \"rollup_address\": \"string\"\n  },\n  \"tx_details\": {\n    \"gas_limit\": [\n      7665,\n      9006\n    ],\n    \"max_fee\": \"string\",\n    \"max_priority_fee_bips\": 6486\n  },\n  \"uniqueness\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40fb1bdf-7ab4-4297-bab8-fc1237459782",
+              "name": "Upstream service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rollup",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": \"<string>\",\n  \"call\": \"<object>\",\n  \"sequencer\": {\n    \"da_address\": \"string\",\n    \"rollup_address\": \"string\"\n  },\n  \"tx_details\": {\n    \"gas_limit\": [\n      7665,\n      9006\n    ],\n    \"max_fee\": \"string\",\n    \"max_priority_fee_bips\": 6486\n  },\n  \"uniqueness\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8d57af9f-82f3-4c48-b4c0-2dc3e378d46a",
+    "name": "Bullet Trading Account Rollup API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Bullet exchange. Provides Binance FAPI-compatible endpoints for trading, account management, and market data.\n\nContact Support:\n Name: Bullet",
+      "type": "text/plain"
+    }
+  }
+}

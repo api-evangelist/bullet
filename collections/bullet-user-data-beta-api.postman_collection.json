@@ -1,0 +1,2028 @@
+{
+  "item": [
+    {
+      "id": "abbcd91e-8a96-45a8-8340-b542dc1eed4c",
+      "name": "User Data (Beta)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da28c93a-c0a4-46c3-b5eb-0628154c617f",
+          "name": "All Orders (order history from ClickHouse)",
+          "request": {
+            "name": "All Orders (order history from ClickHouse)",
+            "description": {},
+            "url": {
+              "path": [
+                "fapi",
+                "v1",
+                "allOrders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string,null>",
+                  "description": "Account address (required on first request, encoded in cursor for subsequent)"
+                },
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string,null>",
+                  "description": "Trading pair symbol (optional filter)"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderId",
+                  "value": "<integer,null-int64>",
+                  "description": "Return orders with orderId >= this value"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<integer,null-int64>",
+                  "description": "Start time in microseconds"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<integer,null-int64>",
+                  "description": "End time in microseconds"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null>",
+                  "description": "Number of results (default 500, max 1000)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86632c32-104b-4e01-bf74-b24f0637cf8b",
+              "name": "List of all orders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "allOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"orderId\": 2471,\n      \"symbol\": \"string\",\n      \"status\": \"string\",\n      \"price\": \"string\",\n      \"origQty\": \"string\",\n      \"executedQty\": \"string\",\n      \"avgPrice\": \"string\",\n      \"side\": \"string\",\n      \"type\": \"string\",\n      \"time\": 4828,\n      \"updateTime\": 6410,\n      \"reduceOnly\": false,\n      \"closePosition\": true,\n      \"positionSide\": \"string\",\n      \"txHashes\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"orderId\": 7953,\n      \"symbol\": \"string\",\n      \"status\": \"string\",\n      \"price\": \"string\",\n      \"origQty\": \"string\",\n      \"executedQty\": \"string\",\n      \"avgPrice\": \"string\",\n      \"side\": \"string\",\n      \"type\": \"string\",\n      \"time\": 9422,\n      \"updateTime\": 3868,\n      \"reduceOnly\": false,\n      \"closePosition\": true,\n      \"positionSide\": \"string\",\n      \"txHashes\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ada6c5e7-c62b-455e-8697-8000d2bf381f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "allOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1eaa7e3e-e274-4c17-8f0b-c6ce568746be",
+              "name": "Market not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "allOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae743cf7-5f3f-4c84-9b33-2d1bae4ff929",
+              "name": "Upstream service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "allOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57fb8ac2-8b83-4800-ba86-7345a7129dd7",
+              "name": "Historical data service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "allOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c960e913-5dd9-4ab5-8e7f-9f2ed3ba9d5c",
+          "name": "User Deposit History",
+          "request": {
+            "name": "User Deposit History",
+            "description": {},
+            "url": {
+              "path": [
+                "fapi",
+                "v1",
+                "userDeposits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string,null>",
+                  "description": "Account address (required on first request, encoded in cursor for subsequent)"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<integer,null-int64>",
+                  "description": "Start time in microseconds"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<integer,null-int64>",
+                  "description": "End time in microseconds"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null>",
+                  "description": "Number of results (default 500, max 1000)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9de99be9-8608-4bf8-8a9f-d8d370a3ff1a",
+              "name": "List of user deposits",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userDeposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"asset\": \"string\",\n      \"assetId\": 2744,\n      \"amount\": \"string\",\n      \"amountNotional\": \"string\",\n      \"txHash\": \"string\",\n      \"eventNumber\": 6743,\n      \"time\": 11\n    },\n    {\n      \"asset\": \"string\",\n      \"assetId\": 4836,\n      \"amount\": \"string\",\n      \"amountNotional\": \"string\",\n      \"txHash\": \"string\",\n      \"eventNumber\": 7102,\n      \"time\": 9957\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de6d4556-101c-4bb3-97e4-33e00cf606f1",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userDeposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "848f697b-61a4-4de6-82a0-cef908b38085",
+              "name": "Upstream service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userDeposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ab8601b-f455-41b6-81f2-059a373c96bc",
+              "name": "Historical data service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userDeposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "333f689f-56a4-4e56-80f7-daf938aa8a4c",
+          "name": "User Funding Payment History",
+          "request": {
+            "name": "User Funding Payment History",
+            "description": {},
+            "url": {
+              "path": [
+                "fapi",
+                "v1",
+                "userFundingPayments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string,null>",
+                  "description": "Account address (required on first request, encoded in cursor for subsequent)"
+                },
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string,null>",
+                  "description": "Trading pair symbol (optional filter)"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<integer,null-int64>",
+                  "description": "Start time in microseconds (optional filter)"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<integer,null-int64>",
+                  "description": "End time in microseconds (optional filter)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null>",
+                  "description": "Number of results (default 500, max 1000)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8185327d-aba9-4834-b10c-21c0f54330e2",
+              "name": "List of user funding payments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userFundingPayments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"symbol\": \"string\",\n      \"marketId\": 2347,\n      \"fundingApplied\": \"string\",\n      \"txHash\": \"string\",\n      \"eventNumber\": 3530,\n      \"time\": 5035\n    },\n    {\n      \"symbol\": \"string\",\n      \"marketId\": 4854,\n      \"fundingApplied\": \"string\",\n      \"txHash\": \"string\",\n      \"eventNumber\": 2531,\n      \"time\": 8374\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df07e661-7c9b-462e-9dd6-8ec7006fae73",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userFundingPayments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5eea8145-ec03-4c29-a0f6-cdf3850fd8d5",
+              "name": "Market not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userFundingPayments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd929e69-9c79-4c59-8cb2-cc59bd905401",
+              "name": "Upstream service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userFundingPayments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7004255-4b40-4bcf-a81f-40b425aa57ab",
+              "name": "Historical data service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userFundingPayments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11798484-5ab8-4e13-af03-1a5844c209b2",
+          "name": "User Liquidation History",
+          "request": {
+            "name": "User Liquidation History",
+            "description": {},
+            "url": {
+              "path": [
+                "fapi",
+                "v1",
+                "userLiquidations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string,null>",
+                  "description": "Account address (required on first request, encoded in cursor for subsequent)"
+                },
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string,null>",
+                  "description": "Trading pair symbol (optional filter)"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<integer,null-int64>",
+                  "description": "Start time in microseconds (optional filter)"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<integer,null-int64>",
+                  "description": "End time in microseconds (optional filter)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null>",
+                  "description": "Number of results (default 500, max 1000)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69f212bc-5312-4675-911e-e0b2a19ba4e3",
+              "name": "List of user liquidations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userLiquidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"symbol\": \"string\",\n      \"liquidateeAddress\": \"string\",\n      \"liquidatorAddress\": \"string\",\n      \"marketId\": 2139,\n      \"markPrice\": \"string\",\n      \"size\": \"string\",\n      \"side\": \"string\",\n      \"liquidatorReward\": \"string\",\n      \"realizedPnl\": \"string\",\n      \"txHash\": \"string\",\n      \"eventNumber\": 7516,\n      \"time\": 1411\n    },\n    {\n      \"symbol\": \"string\",\n      \"liquidateeAddress\": \"string\",\n      \"liquidatorAddress\": \"string\",\n      \"marketId\": 9454,\n      \"markPrice\": \"string\",\n      \"size\": \"string\",\n      \"side\": \"string\",\n      \"liquidatorReward\": \"string\",\n      \"realizedPnl\": \"string\",\n      \"txHash\": \"string\",\n      \"eventNumber\": 6664,\n      \"time\": 3598\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c4bad73-0bb0-4a2e-9bdd-517df9289f0a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userLiquidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "871ce5b4-af5b-4295-85dc-529fccf7b7b8",
+              "name": "Market not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userLiquidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ec8dcd9-4ac8-4f52-bd09-50cf24ce1efe",
+              "name": "Upstream service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userLiquidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abe944dd-0c67-4bfa-92c2-cb0e3e46c22b",
+              "name": "Historical data service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userLiquidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42d033c2-2431-41a8-8371-dc97a500c14e",
+          "name": "Account Trade List",
+          "request": {
+            "name": "Account Trade List",
+            "description": {},
+            "url": {
+              "path": [
+                "fapi",
+                "v1",
+                "userTrades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string,null>",
+                  "description": "Account address (required on first request, encoded in cursor for subsequent)"
+                },
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string,null>",
+                  "description": "Trading pair symbol (optional filter)"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<integer,null-int64>",
+                  "description": "Start time in microseconds (optional filter)"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<integer,null-int64>",
+                  "description": "End time in microseconds (optional filter)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null>",
+                  "description": "Number of results (default 500, max 1000)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69d1c4b7-e447-42b2-a96f-873e92a2eb46",
+              "name": "List of account trades",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userTrades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"symbol\": \"string\",\n      \"id\": 4437,\n      \"orderId\": 6982,\n      \"side\": \"string\",\n      \"price\": \"string\",\n      \"qty\": \"string\",\n      \"quoteQty\": \"string\",\n      \"realizedPnl\": \"string\",\n      \"commission\": \"string\",\n      \"commissionAsset\": \"string\",\n      \"time\": 8175,\n      \"positionSide\": \"string\",\n      \"buyer\": true,\n      \"maker\": true,\n      \"address\": \"string\",\n      \"txHash\": \"string\",\n      \"clientOrderId\": 3525\n    },\n    {\n      \"symbol\": \"string\",\n      \"id\": 854,\n      \"orderId\": 3029,\n      \"side\": \"string\",\n      \"price\": \"string\",\n      \"qty\": \"string\",\n      \"quoteQty\": \"string\",\n      \"realizedPnl\": \"string\",\n      \"commission\": \"string\",\n      \"commissionAsset\": \"string\",\n      \"time\": 7379,\n      \"positionSide\": \"string\",\n      \"buyer\": false,\n      \"maker\": false,\n      \"address\": \"string\",\n      \"txHash\": \"string\",\n      \"clientOrderId\": 6012\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "364fb502-36b1-4e16-bdd6-83622ef59631",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userTrades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af3a0748-dbb5-4926-b7c0-eaf5eddcfa64",
+              "name": "Market not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userTrades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "871e70ac-3d07-4aa1-8084-762f04ce2c07",
+              "name": "Upstream service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userTrades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df790c52-f50a-417e-968a-c423d05e06b3",
+              "name": "Historical data service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userTrades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65cdac07-d2d2-4851-a66a-feff24b7123a",
+          "name": "User Withdrawal History",
+          "request": {
+            "name": "User Withdrawal History",
+            "description": {},
+            "url": {
+              "path": [
+                "fapi",
+                "v1",
+                "userWithdrawals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string,null>",
+                  "description": "Account address (required on first request, encoded in cursor for subsequent)"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<integer,null-int64>",
+                  "description": "Start time in microseconds"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<integer,null-int64>",
+                  "description": "End time in microseconds"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer,null>",
+                  "description": "Number of results (default 500, max 1000)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3bb0fb5-5cc2-42bd-a854-14fc8c43d954",
+              "name": "List of user withdrawals",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userWithdrawals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"asset\": \"string\",\n      \"assetId\": 5463,\n      \"amount\": \"string\",\n      \"amountNotional\": \"string\",\n      \"fee\": \"string\",\n      \"txHash\": \"string\",\n      \"eventNumber\": 5397,\n      \"time\": 3011\n    },\n    {\n      \"asset\": \"string\",\n      \"assetId\": 7097,\n      \"amount\": \"string\",\n      \"amountNotional\": \"string\",\n      \"fee\": \"string\",\n      \"txHash\": \"string\",\n      \"eventNumber\": 568,\n      \"time\": 6044\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea0434de-44dc-4a95-a101-d96653dfb810",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userWithdrawals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c40aab2-b1fa-4688-aaef-2ad19060efbc",
+              "name": "Upstream service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userWithdrawals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1189615d-a00b-47be-ad96-ae53460f2999",
+              "name": "Historical data service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fapi",
+                    "v1",
+                    "userWithdrawals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<integer,null-int64>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer,null>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"message\": \"Transaction validation failed: insufficient funds\",\n  \"details\": null,\n  \"error_id\": \"8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "588c6bbb-b3ab-48d0-9c16-cf23491dbfe1",
+    "name": "Bullet Trading Account User Data (Beta) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Bullet exchange. Provides Binance FAPI-compatible endpoints for trading, account management, and market data.\n\nContact Support:\n Name: Bullet",
+      "type": "text/plain"
+    }
+  }
+}

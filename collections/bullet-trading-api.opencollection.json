@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bullet Account Trading API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trading",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query Current Open Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/openOrder",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clientOrderId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "triggerOrderId",
+                "value": "",
+                "type": "query",
+                "description": "look up a user trigger order (STOP / TAKE_PROFIT) by its\nTriggerOrderId. mutually exclusive with `orderId` /\n`clientOrderId` — trigger orders use an independent id counter\nfrom regular orders in the rollup"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query Current Open Order"
+        },
+        {
+          "info": {
+            "name": "Query All Open Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/openOrders",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair symbol — optional, omit to return open orders across all markets"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Account address"
+              }
+            ]
+          },
+          "docs": "Query All Open Orders"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

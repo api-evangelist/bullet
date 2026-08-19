@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bullet Trading Account API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Account Configuration (Bullet-specific)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/accountConfig",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Account Configuration (Bullet-specific)"
+        },
+        {
+          "info": {
+            "name": "Account Balance (Bullet-specific)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v1/balance",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Superset of `/fapi/v3/balance` that surfaces data the rollup already\nreturns but the Binance-shaped endpoint doesn't expose:\naccount-level trading credits / unrealized loss borrow, per-asset\ngross asset/liability amounts, and referral rewards."
+        },
+        {
+          "info": {
+            "name": "User Commission Rate (USER_DATA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/commissionRate",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User Commission Rate (USER_DATA)"
+        },
+        {
+          "info": {
+            "name": "Notional and Leverage Brackets (USER_DATA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/leverageBracket",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Notional and Leverage Brackets (USER_DATA)"
+        },
+        {
+          "info": {
+            "name": "Query User Rate Limit (USER_DATA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/rateLimit/order"
+          },
+          "docs": "Query User Rate Limit (USER_DATA)"
+        },
+        {
+          "info": {
+            "name": "Symbol Configuration (USER_DATA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v1/symbolConfig",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Symbol Configuration (USER_DATA)"
+        },
+        {
+          "info": {
+            "name": "Get current account information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v3/account",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get current account information"
+        },
+        {
+          "info": {
+            "name": "Get account balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/fapi/v3/balance",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get account balance"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
