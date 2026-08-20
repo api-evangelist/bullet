@@ -95,6 +95,8 @@ apis:
   humanURL: https://tradingapi.bullet.xyz/docs/
   baseURL: https://tradingapi.bullet.xyz
   tags:
+  - Market Data
+  tags_raw:
   - Market-Data
   properties:
   - type: OpenAPI
