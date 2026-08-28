@@ -7,6 +7,18 @@ description: >-
   and position management, and order placement via ed25519-signed transactions, with official Rust
   and WASM/TypeScript SDKs. Bullet runs as a sovereign rollup settling to Solana mainnet-beta, with
   a testnet environment for building and testing against mock assets.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: unknown
