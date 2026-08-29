@@ -4,8 +4,8 @@ info:
   version: 1.0.0
   summary: Discover markets then pull the order book, 24h ticker, and recent trades for a symbol.
 sourceDescriptions:
-- name: bulletTradingApi
-  url: ../openapi/bullet-trading-api-openapi.json
+- name: marketDataApi
+  url: ../openapi/bullet-market-data-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: market-data-snapshot
