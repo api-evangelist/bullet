@@ -1,0 +1,26 @@
+# Front Door AI Index — bullet — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: bullet
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.bullet.xyz
+  final_host: www.bullet.xyz
+  ownership: own
+  owner: bullet
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 2
+  host_score: 2
+  density: 4.05
+  words: 494
+  tiers:
+    agentic: 2
+    core: 0
+    model: 0
+  ambiguous: 0
+  top_terms:
+    MCP: 1
+    llms.txt: 1

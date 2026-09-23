@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Bullet Trading Account SolanaOffchainTx API
+  title: Bullet Trading Solana Offchain Tx API
   description: REST API for the Bullet exchange. Provides Binance FAPI-compatible endpoints for trading, account management, and market data.
   contact:
     name: Bullet
@@ -22,7 +22,7 @@ tags:
 paths:
   /api/v1/solanaOffchainTx:
     post:
-      summary: Submit a Solana off-chain signed transaction to the rollup.
+      summary: Submit a Solana off-chain signed transaction to the rollup
       description: 'Accepts the JSON envelope produced by the SDK''s `solana` / `solanaSimple`
 
         authenticator (Phantom, Solflare, Ledger), where the body is signed with
@@ -74,28 +74,15 @@ paths:
       - SolanaOffchainTx
 components:
   schemas:
-    ModuleRef:
+    TxReceipt:
       type: object
-      description: Reference to a module
+      description: Transaction receipt
       required:
-      - name
+      - result
       properties:
-        name:
-          type: string
-          description: Module name
-    ApiErrorDetail:
-      oneOf:
-      - $ref: '#/components/schemas/JsonValidationErrorDetail'
-      - type: object
-      description: 'Typed details body. Variant order is important for untagged
-
-        deserialization: keep the more-specific shape (`JsonValidation`)
-
-        before more-permissive ones. `Upstream` holds the upstream payload
-
-        verbatim (object, string, array, number, etc.) so pre-PR clients
-
-        reading `details.error` (or `details` directly) keep working.'
+        result:
+          $ref: '#/components/schemas/TxResult'
+          description: Result of transaction execution
     SubmitTxResponse:
       type: object
       description: Response from submitting a transaction.
@@ -122,6 +109,13 @@ components:
           format: uint64
           description: Transaction number (if processed)
           minimum: 0
+    TxResult:
+      type: string
+      description: Transaction execution result
+      enum:
+      - successful
+      - reverted
+      - skipped
     LedgerEvent:
       type: object
       description: Ledger event emitted by a transaction
@@ -152,21 +146,6 @@ components:
         value:
           type: object
           description: Event value (arbitrary JSON)
-    JsonValidationErrorDetail:
-      type: object
-      description: 'One JSON shape failure: machine-readable `rule` + full serde
-
-        message including line/column. Surfaced under `details` on the wire.'
-      required:
-      - rule
-      - message
-      properties:
-        message:
-          type: string
-          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
-        rule:
-          type: string
-          example: wrong_type
     TxStatus:
       type: string
       description: Transaction status
@@ -177,22 +156,19 @@ components:
       - published
       - processed
       - finalized
-    SubmitSolanaOffchainTxRequest:
-      type: object
-      description: 'Body for a Solana off-chain signed transaction.
+    ApiErrorDetail:
+      oneOf:
+      - $ref: '#/components/schemas/JsonValidationErrorDetail'
+      - type: object
+      description: 'Typed details body. Variant order is important for untagged
 
+        deserialization: keep the more-specific shape (`JsonValidation`)
 
-        Produced by the bullet SDK''s `solana` / `solanaSimple` authenticators
+        before more-permissive ones. `Upstream` holds the upstream payload
 
-        (Phantom, Solflare, Ledger). The inner bytes are a Solana off-chain
+        verbatim (object, string, array, number, etc.) so pre-PR clients
 
-        signed message, NOT a borsh-serialized Sovereign tx.'
-      required:
-      - body
-      properties:
-        body:
-          type: string
-          description: Base64-encoded Solana off-chain signed message envelope
+        reading `details.error` (or `details` directly) keep working.'
     ApiErrorResponse:
       type: object
       description: 'Structured API error response matching Bullet API format.
@@ -224,19 +200,43 @@ components:
           description: HTTP status code.
           example: 400
           minimum: 0
-    TxResult:
-      type: string
-      description: Transaction execution result
-      enum:
-      - successful
-      - reverted
-      - skipped
-    TxReceipt:
+    JsonValidationErrorDetail:
       type: object
-      description: Transaction receipt
+      description: 'One JSON shape failure: machine-readable `rule` + full serde
+
+        message including line/column. Surfaced under `details` on the wire.'
       required:
-      - result
+      - rule
+      - message
       properties:
-        result:
-          $ref: '#/components/schemas/TxResult'
-          description: Result of transaction execution
+        message:
+          type: string
+          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
+        rule:
+          type: string
+          example: wrong_type
+    SubmitSolanaOffchainTxRequest:
+      type: object
+      description: 'Body for a Solana off-chain signed transaction.
+
+
+        Produced by the bullet SDK''s `solana` / `solanaSimple` authenticators
+
+        (Phantom, Solflare, Ledger). The inner bytes are a Solana off-chain
+
+        signed message, NOT a borsh-serialized Sovereign tx.'
+      required:
+      - body
+      properties:
+        body:
+          type: string
+          description: Base64-encoded Solana off-chain signed message envelope
+    ModuleRef:
+      type: object
+      description: Reference to a module
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Module name

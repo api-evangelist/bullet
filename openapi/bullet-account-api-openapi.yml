@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Bullet Trading Account API
   description: REST API for the Bullet exchange. Provides Binance FAPI-compatible endpoints for trading, account management, and market data.
@@ -277,245 +277,26 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
-    AssetReward:
+    Delegate:
       type: object
       required:
-      - asset
-      - assetId
-      - variant
-      - cumulativeAmount
-      - claimedAmount
-      - unclaimedAmount
+      - address
+      - name
+      - flags
       properties:
-        asset:
+        address:
           type: string
-        assetId:
-          type: integer
-          format: uint16
-          minimum: 0
-        claimedAmount:
-          type: string
-          format: decimal
-        cumulativeAmount:
-          type: string
-          format: decimal
-        unclaimedAmount:
-          type: string
-          format: decimal
-        variant:
-          type: string
-    AccountConfig:
-      type: object
-      required:
-      - delegates
-      properties:
-        delegates:
-          type: array
-          items:
-            $ref: '#/components/schemas/Delegate'
-    ApiErrorDetail:
-      oneOf:
-      - $ref: '#/components/schemas/JsonValidationErrorDetail'
-      - type: object
-      description: 'Typed details body. Variant order is important for untagged
-
-        deserialization: keep the more-specific shape (`JsonValidation`)
-
-        before more-permissive ones. `Upstream` holds the upstream payload
-
-        verbatim (object, string, array, number, etc.) so pre-PR clients
-
-        reading `details.error` (or `details` directly) keep working.'
-    AccountAsset:
-      type: object
-      required:
-      - asset
-      - assetId
-      - walletBalance
-      - updateTime
-      properties:
-        asset:
-          type: string
-        assetId:
-          type: integer
-          format: uint16
-          minimum: 0
-        updateTime:
-          type: integer
+        expiresAt:
+          type:
+          - integer
+          - 'null'
           format: int64
-        walletBalance:
-          type: string
-          format: decimal
-    Bracket:
-      type: object
-      required:
-      - bracket
-      - initialLeverage
-      - notionalCap
-      - notionalFloor
-      - maintMarginRatio
-      - cum
-      properties:
-        bracket:
+        flags:
           type: integer
-          format: uint32
+          format: int32
           minimum: 0
-        cum:
-          type: number
-          format: double
-        initialLeverage:
-          type: integer
-          format: uint32
-          minimum: 0
-        maintMarginRatio:
-          type: number
-          format: double
-        notionalCap:
-          type: number
-          format: double
-        notionalFloor:
-          type: number
-          format: double
-    AssetBalance:
-      type: object
-      required:
-      - asset
-      - assetId
-      - balance
-      - assetAmount
-      - liabilityAmount
-      - maxWithdrawAmount
-      - updateTime
-      properties:
-        asset:
+        name:
           type: string
-        assetAmount:
-          type: string
-          format: decimal
-        assetId:
-          type: integer
-          format: uint16
-          minimum: 0
-        balance:
-          type: string
-          format: decimal
-        liabilityAmount:
-          type: string
-          format: decimal
-        maxWithdrawAmount:
-          type: string
-          format: decimal
-        updateTime:
-          type: integer
-          format: int64
-    AccountBalance:
-      type: object
-      required:
-      - account
-      - assets
-      - rewards
-      properties:
-        account:
-          $ref: '#/components/schemas/AccountBalanceSummary'
-        assets:
-          type: array
-          items:
-            $ref: '#/components/schemas/AssetBalance'
-        rewards:
-          type: array
-          items:
-            $ref: '#/components/schemas/AssetReward'
-    JsonValidationErrorDetail:
-      type: object
-      description: 'One JSON shape failure: machine-readable `rule` + full serde
-
-        message including line/column. Surfaced under `details` on the wire.'
-      required:
-      - rule
-      - message
-      properties:
-        message:
-          type: string
-          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
-        rule:
-          type: string
-          example: wrong_type
-    Balance:
-      type: object
-      required:
-      - accountAlias
-      - asset
-      - balance
-      - crossWalletBalance
-      - crossUnPnl
-      - availableBalance
-      - maxWithdrawAmount
-      - marginAvailable
-      - updateTime
-      properties:
-        accountAlias:
-          type: string
-        asset:
-          type: string
-        availableBalance:
-          type: string
-          format: decimal
-        balance:
-          type: string
-          format: decimal
-        crossUnPnl:
-          type: string
-          format: decimal
-        crossWalletBalance:
-          type: string
-          format: decimal
-        marginAvailable:
-          type: boolean
-        maxWithdrawAmount:
-          type: string
-          format: decimal
-        updateTime:
-          type: integer
-          format: int64
-    AccountPosition:
-      type: object
-      required:
-      - symbol
-      - marketId
-      - unrealizedProfit
-      - entryPrice
-      - initialMargin
-      - maintMargin
-      - positionSide
-      - positionAmt
-      - updateTime
-      properties:
-        entryPrice:
-          type: string
-          format: decimal
-        initialMargin:
-          type: string
-          format: decimal
-        maintMargin:
-          type: string
-          format: decimal
-        marketId:
-          type: integer
-          format: uint16
-          minimum: 0
-        positionAmt:
-          type: string
-          format: decimal
-        positionSide:
-          type: string
-        symbol:
-          type: string
-        unrealizedProfit:
-          type: string
-          format: decimal
-        updateTime:
-          type: integer
-          format: int64
     Account:
       type: object
       required:
@@ -584,55 +365,90 @@ components:
         totalWalletBalance:
           type: string
           format: decimal
-    AccountBalanceSummary:
+    AccountConfig:
       type: object
       required:
-      - tradingCredits
-      - unrealizedLossBorrow
+      - delegates
       properties:
-        tradingCredits:
-          type: string
-          format: decimal
-        unrealizedLossBorrow:
-          type: string
-          format: decimal
-    Delegate:
-      type: object
-      required:
-      - address
-      - name
-      - flags
-      properties:
-        address:
-          type: string
-        expiresAt:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        flags:
-          type: integer
-          format: int32
-          minimum: 0
-        name:
-          type: string
-    LeverageBracket:
-      type: object
-      required:
-      - symbol
-      - brackets
-      properties:
-        brackets:
+        delegates:
           type: array
           items:
-            $ref: '#/components/schemas/Bracket'
-        notionalCoef:
-          type:
-          - number
-          - 'null'
-          format: double
-        symbol:
+            $ref: '#/components/schemas/Delegate'
+    AssetBalance:
+      type: object
+      required:
+      - asset
+      - assetId
+      - balance
+      - assetAmount
+      - liabilityAmount
+      - maxWithdrawAmount
+      - updateTime
+      properties:
+        asset:
           type: string
+        assetAmount:
+          type: string
+          format: decimal
+        assetId:
+          type: integer
+          format: uint16
+          minimum: 0
+        balance:
+          type: string
+          format: decimal
+        liabilityAmount:
+          type: string
+          format: decimal
+        maxWithdrawAmount:
+          type: string
+          format: decimal
+        updateTime:
+          type: integer
+          format: int64
+    ApiErrorDetail:
+      oneOf:
+      - $ref: '#/components/schemas/JsonValidationErrorDetail'
+      - type: object
+      description: 'Typed details body. Variant order is important for untagged
+
+        deserialization: keep the more-specific shape (`JsonValidation`)
+
+        before more-permissive ones. `Upstream` holds the upstream payload
+
+        verbatim (object, string, array, number, etc.) so pre-PR clients
+
+        reading `details.error` (or `details` directly) keep working.'
+    Bracket:
+      type: object
+      required:
+      - bracket
+      - initialLeverage
+      - notionalCap
+      - notionalFloor
+      - maintMarginRatio
+      - cum
+      properties:
+        bracket:
+          type: integer
+          format: uint32
+          minimum: 0
+        cum:
+          type: number
+          format: double
+        initialLeverage:
+          type: integer
+          format: uint32
+          minimum: 0
+        maintMarginRatio:
+          type: number
+          format: double
+        notionalCap:
+          type: number
+          format: double
+        notionalFloor:
+          type: number
+          format: double
     ApiErrorResponse:
       type: object
       description: 'Structured API error response matching Bullet API format.
@@ -664,3 +480,187 @@ components:
           description: HTTP status code.
           example: 400
           minimum: 0
+    AccountBalanceSummary:
+      type: object
+      required:
+      - tradingCredits
+      - unrealizedLossBorrow
+      properties:
+        tradingCredits:
+          type: string
+          format: decimal
+        unrealizedLossBorrow:
+          type: string
+          format: decimal
+    AccountPosition:
+      type: object
+      required:
+      - symbol
+      - marketId
+      - unrealizedProfit
+      - entryPrice
+      - initialMargin
+      - maintMargin
+      - positionSide
+      - positionAmt
+      - updateTime
+      properties:
+        entryPrice:
+          type: string
+          format: decimal
+        initialMargin:
+          type: string
+          format: decimal
+        maintMargin:
+          type: string
+          format: decimal
+        marketId:
+          type: integer
+          format: uint16
+          minimum: 0
+        positionAmt:
+          type: string
+          format: decimal
+        positionSide:
+          type: string
+        symbol:
+          type: string
+        unrealizedProfit:
+          type: string
+          format: decimal
+        updateTime:
+          type: integer
+          format: int64
+    JsonValidationErrorDetail:
+      type: object
+      description: 'One JSON shape failure: machine-readable `rule` + full serde
+
+        message including line/column. Surfaced under `details` on the wire.'
+      required:
+      - rule
+      - message
+      properties:
+        message:
+          type: string
+          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
+        rule:
+          type: string
+          example: wrong_type
+    Balance:
+      type: object
+      required:
+      - accountAlias
+      - asset
+      - balance
+      - crossWalletBalance
+      - crossUnPnl
+      - availableBalance
+      - maxWithdrawAmount
+      - marginAvailable
+      - updateTime
+      properties:
+        accountAlias:
+          type: string
+        asset:
+          type: string
+        availableBalance:
+          type: string
+          format: decimal
+        balance:
+          type: string
+          format: decimal
+        crossUnPnl:
+          type: string
+          format: decimal
+        crossWalletBalance:
+          type: string
+          format: decimal
+        marginAvailable:
+          type: boolean
+        maxWithdrawAmount:
+          type: string
+          format: decimal
+        updateTime:
+          type: integer
+          format: int64
+    AccountAsset:
+      type: object
+      required:
+      - asset
+      - assetId
+      - walletBalance
+      - updateTime
+      properties:
+        asset:
+          type: string
+        assetId:
+          type: integer
+          format: uint16
+          minimum: 0
+        updateTime:
+          type: integer
+          format: int64
+        walletBalance:
+          type: string
+          format: decimal
+    AccountBalance:
+      type: object
+      required:
+      - account
+      - assets
+      - rewards
+      properties:
+        account:
+          $ref: '#/components/schemas/AccountBalanceSummary'
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetBalance'
+        rewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetReward'
+    LeverageBracket:
+      type: object
+      required:
+      - symbol
+      - brackets
+      properties:
+        brackets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bracket'
+        notionalCoef:
+          type:
+          - number
+          - 'null'
+          format: double
+        symbol:
+          type: string
+    AssetReward:
+      type: object
+      required:
+      - asset
+      - assetId
+      - variant
+      - cumulativeAmount
+      - claimedAmount
+      - unclaimedAmount
+      properties:
+        asset:
+          type: string
+        assetId:
+          type: integer
+          format: uint16
+          minimum: 0
+        claimedAmount:
+          type: string
+          format: decimal
+        cumulativeAmount:
+          type: string
+          format: decimal
+        unclaimedAmount:
+          type: string
+          format: decimal
+        variant:
+          type: string

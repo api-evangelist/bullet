@@ -1,15 +1,7 @@
 {
   "provider": "bullet",
   "sources": [
-    "bullet-account-api-openapi.yml",
-    "bullet-address-api-openapi.yml",
-    "bullet-health-api-openapi.yml",
-    "bullet-market-data-api-openapi.yml",
-    "bullet-rollup-api-openapi.yml",
-    "bullet-solanaoffchaintx-api-openapi.yml",
-    "bullet-trading-api-openapi.yml",
-    "bullet-tx-api-openapi.yml",
-    "bullet-user-data-beta-api-openapi.yml"
+    "_original/bullet-trading-api-openapi.json"
   ],
   "outputs": [
     "bullet-account-api-openapi.yml",
@@ -25,6 +17,34 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "bullet-trading-api-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "bullet-trading-api-openapi.json: tagged paths POST /api/v1/solanaOffchainTx -> SolanaOffchainTx",
+    "bullet-trading-api-openapi.json: tagged paths GET /rollup/constants -> Rollup",
+    "bullet-trading-api-openapi.json: tagged paths GET /rollup/schema -> Rollup",
+    "bullet-trading-api-openapi.json: tagged paths POST /tx/submit -> Tx",
+    "bullet-trading-api-openapi.json: tagged paths POST /rollup/simulate -> Rollup",
+    "bullet-trading-api-openapi.json: declared missing tag: Account",
+    "bullet-trading-api-openapi.json: declared missing tag: Address",
+    "bullet-trading-api-openapi.json: declared missing tag: Health",
+    "bullet-trading-api-openapi.json: declared missing tag: Market-Data",
+    "bullet-trading-api-openapi.json: declared missing tag: Rollup",
+    "bullet-trading-api-openapi.json: declared missing tag: SolanaOffchainTx",
+    "bullet-trading-api-openapi.json: declared missing tag: Trading",
+    "bullet-trading-api-openapi.json: declared missing tag: Tx",
+    "bullet-trading-api-openapi.json: declared missing tag: User Data (Beta)",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "bullet-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bullet-address-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bullet-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bullet-market-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bullet-rollup-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bullet-solanaoffchaintx-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bullet-trading-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bullet-tx-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bullet-user-data-beta-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
