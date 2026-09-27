@@ -54,6 +54,38 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
+    ApiErrorDetail:
+      oneOf:
+      - $ref: '#/components/schemas/JsonValidationErrorDetail'
+      - type: object
+      description: 'Typed details body. Variant order is important for untagged
+
+        deserialization: keep the more-specific shape (`JsonValidation`)
+
+        before more-permissive ones. `Upstream` holds the upstream payload
+
+        verbatim (object, string, array, number, etc.) so pre-PR clients
+
+        reading `details.error` (or `details` directly) keep working.'
+    AddressState:
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          type: string
+          description: the queried address, echoed back as supplied
+        generation:
+          type:
+          - integer
+          - 'null'
+          format: uint64
+          description: 'highest uniqueness generation this credential has submitted with,
+
+            or null if it has never submitted a tx. clients use this to seed a
+
+            monotonic generation override so the next tx doesn''t collide'
+          minimum: 0
     ApiErrorResponse:
       type: object
       description: 'Structured API error response matching Bullet API format.
@@ -85,19 +117,6 @@ components:
           description: HTTP status code.
           example: 400
           minimum: 0
-    ApiErrorDetail:
-      oneOf:
-      - $ref: '#/components/schemas/JsonValidationErrorDetail'
-      - type: object
-      description: 'Typed details body. Variant order is important for untagged
-
-        deserialization: keep the more-specific shape (`JsonValidation`)
-
-        before more-permissive ones. `Upstream` holds the upstream payload
-
-        verbatim (object, string, array, number, etc.) so pre-PR clients
-
-        reading `details.error` (or `details` directly) keep working.'
     JsonValidationErrorDetail:
       type: object
       description: 'One JSON shape failure: machine-readable `rule` + full serde
@@ -113,22 +132,3 @@ components:
         rule:
           type: string
           example: wrong_type
-    AddressState:
-      type: object
-      required:
-      - address
-      properties:
-        address:
-          type: string
-          description: the queried address, echoed back as supplied
-        generation:
-          type:
-          - integer
-          - 'null'
-          format: uint64
-          description: 'highest uniqueness generation this credential has submitted with,
-
-            or null if it has never submitted a tx. clients use this to seed a
-
-            monotonic generation override so the next tx doesn''t collide'
-          minimum: 0

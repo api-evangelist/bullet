@@ -65,41 +65,23 @@ paths:
       - Tx
 components:
   schemas:
-    TxReceipt:
+    ModuleRef:
       type: object
-      description: Transaction receipt
+      description: Reference to a module
       required:
-      - result
+      - name
       properties:
-        result:
-          $ref: '#/components/schemas/TxResult'
-          description: Result of transaction execution
-    SubmitTxResponse:
-      type: object
-      description: Response from submitting a transaction.
-      required:
-      - id
-      - status
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/LedgerEvent'
-          description: Events emitted by the transaction
-        id:
+        name:
           type: string
-          description: The transaction hash
-        receipt:
-          $ref: '#/components/schemas/TxReceipt'
-          description: Transaction receipt (if processed)
-        status:
-          $ref: '#/components/schemas/TxStatus'
-          description: Transaction status
-        tx_number:
-          type: integer
-          format: uint64
-          description: Transaction number (if processed)
-          minimum: 0
+          description: Module name
+    SubmitTxRequest:
+      type: object
+      required:
+      - body
+      properties:
+        body:
+          type: string
+          description: Base64 encoded borsh string
     TxResult:
       type: string
       description: Transaction execution result
@@ -137,6 +119,57 @@ components:
         value:
           type: object
           description: Event value (arbitrary JSON)
+    JsonValidationErrorDetail:
+      type: object
+      description: 'One JSON shape failure: machine-readable `rule` + full serde
+
+        message including line/column. Surfaced under `details` on the wire.'
+      required:
+      - rule
+      - message
+      properties:
+        message:
+          type: string
+          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
+        rule:
+          type: string
+          example: wrong_type
+    SubmitTxResponse:
+      type: object
+      description: Response from submitting a transaction.
+      required:
+      - id
+      - status
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/LedgerEvent'
+          description: Events emitted by the transaction
+        id:
+          type: string
+          description: The transaction hash
+        receipt:
+          $ref: '#/components/schemas/TxReceipt'
+          description: Transaction receipt (if processed)
+        status:
+          $ref: '#/components/schemas/TxStatus'
+          description: Transaction status
+        tx_number:
+          type: integer
+          format: uint64
+          description: Transaction number (if processed)
+          minimum: 0
+    TxStatus:
+      type: string
+      description: Transaction status
+      enum:
+      - unknown
+      - dropped
+      - submitted
+      - published
+      - processed
+      - finalized
     ApiErrorDetail:
       oneOf:
       - $ref: '#/components/schemas/JsonValidationErrorDetail'
@@ -150,16 +183,15 @@ components:
         verbatim (object, string, array, number, etc.) so pre-PR clients
 
         reading `details.error` (or `details` directly) keep working.'
-    TxStatus:
-      type: string
-      description: Transaction status
-      enum:
-      - unknown
-      - dropped
-      - submitted
-      - published
-      - processed
-      - finalized
+    TxReceipt:
+      type: object
+      description: Transaction receipt
+      required:
+      - result
+      properties:
+        result:
+          $ref: '#/components/schemas/TxResult'
+          description: Result of transaction execution
     ApiErrorResponse:
       type: object
       description: 'Structured API error response matching Bullet API format.
@@ -191,35 +223,3 @@ components:
           description: HTTP status code.
           example: 400
           minimum: 0
-    SubmitTxRequest:
-      type: object
-      required:
-      - body
-      properties:
-        body:
-          type: string
-          description: Base64 encoded borsh string
-    JsonValidationErrorDetail:
-      type: object
-      description: 'One JSON shape failure: machine-readable `rule` + full serde
-
-        message including line/column. Surfaced under `details` on the wire.'
-      required:
-      - rule
-      - message
-      properties:
-        message:
-          type: string
-          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
-        rule:
-          type: string
-          example: wrong_type
-    ModuleRef:
-      type: object
-      description: Reference to a module
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Module name

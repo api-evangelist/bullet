@@ -80,6 +80,13 @@ paths:
                 $ref: '#/components/schemas/ReadinessStatus'
 components:
   schemas:
+    HealthState:
+      type: string
+      description: health state for a single component
+      enum:
+      - starting
+      - running
+      - recovering
     TimeResponse:
       type: object
       required:
@@ -88,6 +95,8 @@ components:
         serverTime:
           type: integer
           format: int64
+    PingResponse:
+      type: object
     ReadinessStatus:
       type: object
       description: readiness response returned by /health/ready
@@ -103,12 +112,3 @@ components:
             type: string
         ready:
           type: boolean
-    PingResponse:
-      type: object
-    HealthState:
-      type: string
-      description: health state for a single component
-      enum:
-      - starting
-      - running
-      - recovering
