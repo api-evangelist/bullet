@@ -67,25 +67,6 @@ components:
         verbatim (object, string, array, number, etc.) so pre-PR clients
 
         reading `details.error` (or `details` directly) keep working.'
-    AddressState:
-      type: object
-      required:
-      - address
-      properties:
-        address:
-          type: string
-          description: the queried address, echoed back as supplied
-        generation:
-          type:
-          - integer
-          - 'null'
-          format: uint64
-          description: 'highest uniqueness generation this credential has submitted with,
-
-            or null if it has never submitted a tx. clients use this to seed a
-
-            monotonic generation override so the next tx doesn''t collide'
-          minimum: 0
     ApiErrorResponse:
       type: object
       description: 'Structured API error response matching Bullet API format.
@@ -132,3 +113,22 @@ components:
         rule:
           type: string
           example: wrong_type
+    AddressState:
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          type: string
+          description: the queried address, echoed back as supplied
+        generation:
+          type:
+          - integer
+          - 'null'
+          format: uint64
+          description: 'highest uniqueness generation this credential has submitted with,
+
+            or null if it has never submitted a tx. clients use this to seed a
+
+            monotonic generation override so the next tx doesn''t collide'
+          minimum: 0

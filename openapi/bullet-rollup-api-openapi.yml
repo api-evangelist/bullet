@@ -110,66 +110,6 @@ paths:
       - Rollup
 components:
   schemas:
-    SequencerParameter:
-      type: object
-      description: Optional sequencer configuration for a simulation request.
-      properties:
-        da_address:
-          type: string
-          description: Custom data availability address for the sequencer
-        rollup_address:
-          type: string
-          description: Custom rollup address for the sequencer
-    RollupConstants:
-      type: object
-      description: Response from the `/rollup/constants` endpoint.
-      required:
-      - chain_id
-      - chain_name
-      - gas_token_id
-      - hyperlane_domain
-      - address_prefix
-      properties:
-        address_prefix:
-          type: string
-        chain_id:
-          type: integer
-          format: uint64
-          minimum: 0
-        chain_name:
-          type: string
-        gas_token_id:
-          type: string
-        hyperlane_domain:
-          type: integer
-          format: uint64
-          minimum: 0
-    RevertOutcome:
-      type: object
-      description: Reverted simulation outcome.
-      required:
-      - detail
-      properties:
-        detail:
-          type: object
-          description: Structured detail about the revert (`ErrorContext`, an arbitrary JSON object)
-    SimulatedEvent:
-      type: object
-      description: An event emitted during transaction simulation.
-      required:
-      - value
-      - key
-      - module
-      properties:
-        key:
-          type: string
-          description: The event key
-        module:
-          type: string
-          description: The module that emitted the event
-        value:
-          type: object
-          description: The event data (arbitrary JSON)
     SimulateParameters:
       type: object
       description: 'Parameters for a transaction simulation request.
@@ -199,40 +139,45 @@ components:
         uniqueness:
           type: object
           description: Optional uniqueness data for the transaction
-    JsonValidationErrorDetail:
-      type: object
-      description: 'One JSON shape failure: machine-readable `rule` + full serde
+    ApiErrorDetail:
+      oneOf:
+      - $ref: '#/components/schemas/JsonValidationErrorDetail'
+      - type: object
+      description: 'Typed details body. Variant order is important for untagged
 
-        message including line/column. Surfaced under `details` on the wire.'
-      required:
-      - rule
-      - message
-      properties:
-        message:
-          type: string
-          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
-        rule:
-          type: string
-          example: wrong_type
-    SuccessOutcome:
+        deserialization: keep the more-specific shape (`JsonValidation`)
+
+        before more-permissive ones. `Upstream` holds the upstream payload
+
+        verbatim (object, string, array, number, etc.) so pre-PR clients
+
+        reading `details.error` (or `details` directly) keep working.'
+    RevertOutcome:
       type: object
-      description: Successful simulation outcome.
+      description: Reverted simulation outcome.
       required:
-      - gas_used
-      - priority_fee
-      - events
+      - detail
       properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimulatedEvent'
-          description: Events emitted during execution
-        gas_used:
+        detail:
+          type: object
+          description: Structured detail about the revert (`ErrorContext`, an arbitrary JSON object)
+    SimulatedEvent:
+      type: object
+      description: An event emitted during transaction simulation.
+      required:
+      - value
+      - key
+      - module
+      properties:
+        key:
           type: string
-          description: Gas consumed by the transaction (gas-token amount, as a decimal string)
-        priority_fee:
+          description: The event key
+        module:
           type: string
-          description: Priority fee paid (gas-token amount, as a decimal string)
+          description: The module that emitted the event
+        value:
+          type: object
+          description: The event data (arbitrary JSON)
     TxDetailsParameter:
       type: object
       description: Optional transaction details for a simulation request.
@@ -296,28 +241,6 @@ components:
         Discriminated on `outcome`, mirroring the sequencer''s `SimulateOutcome`
 
         (`sov-rollup-apis`): `success` / `reverted` / `skipped`.'
-    ApiErrorDetail:
-      oneOf:
-      - $ref: '#/components/schemas/JsonValidationErrorDetail'
-      - type: object
-      description: 'Typed details body. Variant order is important for untagged
-
-        deserialization: keep the more-specific shape (`JsonValidation`)
-
-        before more-permissive ones. `Upstream` holds the upstream payload
-
-        verbatim (object, string, array, number, etc.) so pre-PR clients
-
-        reading `details.error` (or `details` directly) keep working.'
-    FailOutcome:
-      type: object
-      description: Skipped simulation outcome.
-      required:
-      - reason
-      properties:
-        reason:
-          type: string
-          description: The reason the transaction was skipped
     ApiErrorResponse:
       type: object
       description: 'Structured API error response matching Bullet API format.
@@ -349,3 +272,80 @@ components:
           description: HTTP status code.
           example: 400
           minimum: 0
+    FailOutcome:
+      type: object
+      description: Skipped simulation outcome.
+      required:
+      - reason
+      properties:
+        reason:
+          type: string
+          description: The reason the transaction was skipped
+    SuccessOutcome:
+      type: object
+      description: Successful simulation outcome.
+      required:
+      - gas_used
+      - priority_fee
+      - events
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimulatedEvent'
+          description: Events emitted during execution
+        gas_used:
+          type: string
+          description: Gas consumed by the transaction (gas-token amount, as a decimal string)
+        priority_fee:
+          type: string
+          description: Priority fee paid (gas-token amount, as a decimal string)
+    RollupConstants:
+      type: object
+      description: Response from the `/rollup/constants` endpoint.
+      required:
+      - chain_id
+      - chain_name
+      - gas_token_id
+      - hyperlane_domain
+      - address_prefix
+      properties:
+        address_prefix:
+          type: string
+        chain_id:
+          type: integer
+          format: uint64
+          minimum: 0
+        chain_name:
+          type: string
+        gas_token_id:
+          type: string
+        hyperlane_domain:
+          type: integer
+          format: uint64
+          minimum: 0
+    SequencerParameter:
+      type: object
+      description: Optional sequencer configuration for a simulation request.
+      properties:
+        da_address:
+          type: string
+          description: Custom data availability address for the sequencer
+        rollup_address:
+          type: string
+          description: Custom rollup address for the sequencer
+    JsonValidationErrorDetail:
+      type: object
+      description: 'One JSON shape failure: machine-readable `rule` + full serde
+
+        message including line/column. Surfaced under `details` on the wire.'
+      required:
+      - rule
+      - message
+      properties:
+        message:
+          type: string
+          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
+        rule:
+          type: string
+          example: wrong_type

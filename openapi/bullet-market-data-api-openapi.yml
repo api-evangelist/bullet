@@ -483,19 +483,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
-    ApiErrorDetail:
-      oneOf:
-      - $ref: '#/components/schemas/JsonValidationErrorDetail'
-      - type: object
-      description: 'Typed details body. Variant order is important for untagged
-
-        deserialization: keep the more-specific shape (`JsonValidation`)
-
-        before more-permissive ones. `Upstream` holds the upstream payload
-
-        verbatim (object, string, array, number, etc.) so pre-PR clients
-
-        reading `details.error` (or `details` directly) keep working.'
     JsonValidationErrorDetail:
       type: object
       description: 'One JSON shape failure: machine-readable `rule` + full serde
@@ -511,69 +498,36 @@ components:
         rule:
           type: string
           example: wrong_type
-    ApiErrorResponse:
+    ExchangeInfo:
       type: object
-      description: 'Structured API error response matching Bullet API format.
-
-
-        All error responses from the trading API conform to this schema.'
       required:
-      - status
-      - message
+      - rateLimits
+      - assets
+      - symbols
+      - globalConfig
       properties:
-        details:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ApiErrorDetail'
-            description: Structured per-failure details. Shape depends on the variant.
-        error_id:
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
+        chainHash:
           type:
           - string
           - 'null'
-          description: Error identifier for support.
-          example: 8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f
-        message:
-          type: string
-          description: Human-readable error message.
-          example: 'Transaction validation failed: insufficient funds'
-        status:
-          type: integer
-          format: uint16
-          description: HTTP status code.
-          example: 400
-          minimum: 0
-    GlobalConfigResponse:
-      type: object
-      required:
-      - maxOrdersPerUser
-      - maxTriggerOrdersPerUser
-      - maxTriggerOrdersToExecutePerMsg
-      - minNotionalTwapValue
-      - minNotionalTwapValuePerOrder
-      - twapExecutionIntervalSeconds
-      properties:
-        maxOrdersPerUser:
-          type: integer
-          format: uint16
-          minimum: 0
-        maxTriggerOrdersPerUser:
-          type: integer
-          format: uint16
-          minimum: 0
-        maxTriggerOrdersToExecutePerMsg:
-          type: integer
-          format: uint16
-          minimum: 0
-        minNotionalTwapValue:
-          type: string
-          format: decimal
-        minNotionalTwapValuePerOrder:
-          type: string
-          format: decimal
-        twapExecutionIntervalSeconds:
-          type: integer
-          format: uint64
-          minimum: 0
+        chainInfo:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ChainInfo'
+        globalConfig:
+          $ref: '#/components/schemas/GlobalConfigResponse'
+        rateLimits:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateLimit'
+        symbols:
+          type: array
+          items:
+            $ref: '#/components/schemas/Symbol'
     InsuranceBalance:
       type: object
       required:
@@ -588,86 +542,213 @@ components:
           type: array
           items:
             type: string
-    Ticker24hr:
+    Asset:
       type: object
       required:
-      - symbol
-      - priceChange
-      - priceChangePercent
-      - weightedAvgPrice
-      - lastPrice
-      - openPrice
-      - highPrice
-      - lowPrice
-      - volume
-      - quoteVolume
-      - openTime
-      - closeTime
-      - count
+      - asset
+      - marginAvailable
+      - assetId
+      - decimals
+      - withdrawFee
       properties:
-        closeTime:
+        asset:
+          type: string
+        assetId:
           type: integer
-          format: int64
-        count:
-          type: integer
-          format: int64
+          format: uint16
           minimum: 0
-        highPrice:
+        decimals:
+          type: integer
+          format: uint8
+          minimum: 0
+        marginAvailable:
+          type: boolean
+        tokenId:
+          type:
+          - string
+          - 'null'
+        userDepositLimit:
           type: string
           format: decimal
-        lastPrice:
+        withdrawFee:
           type: string
           format: decimal
-        lowPrice:
-          type: string
-          format: decimal
-        openPrice:
-          type: string
-          format: decimal
-        openTime:
+    Trade:
+      type: object
+      required:
+      - id
+      - price
+      - qty
+      - quoteQty
+      - time
+      - isBuyerMaker
+      properties:
+        id:
           type: integer
           format: int64
-        priceChange:
+        isBuyerMaker:
+          type: boolean
+        price:
           type: string
           format: decimal
-        priceChangePercent:
+        qty:
           type: string
           format: decimal
-        quoteVolume:
+        quoteQty:
+          type: string
+          format: decimal
+        time:
+          type: integer
+          format: int64
+    BorrowLendPoolResponse:
+      type: object
+      required:
+      - asset
+      - assetId
+      - isActive
+      - lastUpdateTimestamp
+      - rateParams
+      - depositLimit
+      - borrowLimit
+      - availableAmount
+      - borrowedAmount
+      - cumulativeDepositRate
+      - cumulativeBorrowRate
+      - accumulatedProtocolFees
+      - unclaimedProtocolFees
+      - interestFeeTenthBps
+      properties:
+        accumulatedProtocolFees:
+          type: string
+          format: decimal
+        asset:
+          type: string
+        assetId:
+          type: integer
+          format: uint16
+          minimum: 0
+        availableAmount:
+          type: string
+          format: decimal
+        borrowLimit:
+          type: string
+          format: decimal
+        borrowedAmount:
+          type: string
+          format: decimal
+        cumulativeBorrowRate:
+          type: string
+          format: decimal
+        cumulativeDepositRate:
+          type: string
+          format: decimal
+        depositLimit:
+          type: string
+          format: decimal
+        interestFeeTenthBps:
+          type: integer
+          format: uint64
+          minimum: 0
+        isActive:
+          type: boolean
+        lastUpdateTimestamp:
+          type: integer
+          format: int64
+        rateParams:
+          $ref: '#/components/schemas/RateParams'
+        unclaimedProtocolFees:
+          type: string
+          format: decimal
+    OpenInterest:
+      type: object
+      description: open interest for a single market
+      required:
+      - symbol
+      - openInterest
+      - time
+      properties:
+        openInterest:
           type: string
           format: decimal
         symbol:
           type: string
-        volume:
-          type: string
-          format: decimal
-        weightedAvgPrice:
-          type: string
-          format: decimal
-    ChainInfo:
+        time:
+          type: integer
+          format: int64
+    FundingInfo:
       type: object
-      description: chain-level constants from the rollup
+      description: funding rate metadata per symbol
       required:
-      - chainId
-      - chainName
-      - gasTokenId
-      - hyperlaneDomain
-      - addressPrefix
+      - symbol
+      - adjustedFundingRateCap
+      - adjustedFundingRateFloor
+      - fundingIntervalHours
       properties:
-        addressPrefix:
+        adjustedFundingRateCap:
           type: string
-        chainId:
+          format: decimal
+        adjustedFundingRateFloor:
+          type: string
+          format: decimal
+        fundingIntervalHours:
           type: integer
-          format: uint64
+          format: int32
           minimum: 0
-        chainName:
+        symbol:
           type: string
-        gasTokenId:
+    PremiumIndex:
+      type: object
+      description: real-time mark price, index price, and estimated funding rate per symbol
+      required:
+      - symbol
+      - markPrice
+      - indexPrice
+      - lastFundingRate
+      - interestRate
+      - estimatedFundingRate
+      - nextFundingTime
+      - time
+      properties:
+        estimatedFundingRate:
           type: string
-        hyperlaneDomain:
+          format: decimal
+          description: pre-computed estimated 1h funding rate (8h rate ÷ 8) from current premium index accumulator
+        indexPrice:
+          type: string
+          format: decimal
+        interestRate:
+          type: string
+          format: decimal
+        lastFundingRate:
+          type: string
+          format: decimal
+          description: funding rate for 8h period
+        markPrice:
+          type: string
+          format: decimal
+        nextFundingTime:
           type: integer
-          format: uint64
-          minimum: 0
+          format: int64
+          description: unix timestamp ms of next hourly funding settlement
+        symbol:
+          type: string
+        time:
+          type: integer
+          format: int64
+          description: server time unix ms
+    ApiErrorDetail:
+      oneOf:
+      - $ref: '#/components/schemas/JsonValidationErrorDetail'
+      - type: object
+      description: 'Typed details body. Variant order is important for untagged
+
+        deserialization: keep the more-specific shape (`JsonValidation`)
+
+        before more-permissive ones. `Upstream` holds the upstream payload
+
+        verbatim (object, string, array, number, etc.) so pre-PR clients
+
+        reading `details.error` (or `details` directly) keep working.'
     Symbol:
       type: object
       required:
@@ -780,40 +861,6 @@ components:
             type: string
         underlyingType:
           type: string
-    RateLimit:
-      type: object
-      required:
-      - rateLimitType
-      - interval
-      - intervalNum
-      - limit
-      properties:
-        interval:
-          type: string
-        intervalNum:
-          type: integer
-          format: int32
-        limit:
-          type: integer
-          format: int32
-        rateLimitType:
-          type: string
-    OpenInterest:
-      type: object
-      description: open interest for a single market
-      required:
-      - symbol
-      - openInterest
-      - time
-      properties:
-        openInterest:
-          type: string
-          format: decimal
-        symbol:
-          type: string
-        time:
-          type: integer
-          format: int64
     OrderBook:
       type: object
       required:
@@ -849,237 +896,6 @@ components:
           type: integer
           format: uint64
           minimum: 0
-    InsuranceAsset:
-      type: object
-      required:
-      - asset
-      - marginBalance
-      - updateTime
-      properties:
-        asset:
-          type: string
-        marginBalance:
-          type: string
-          format: decimal
-        updateTime:
-          type: integer
-          format: int64
-    RateParams:
-      type: object
-      required:
-      - optimal_utilisation_rate
-      - min_borrow_rate
-      - optimal_borrow_rate
-      - max_borrow_rate
-      properties:
-        max_borrow_rate:
-          type: string
-          format: decimal
-        min_borrow_rate:
-          type: string
-          format: decimal
-        optimal_borrow_rate:
-          type: string
-          format: decimal
-        optimal_utilisation_rate:
-          type: string
-          format: decimal
-    PriceTicker:
-      type: object
-      required:
-      - symbol
-      - price
-      - time
-      properties:
-        price:
-          type: string
-          format: decimal
-        symbol:
-          type: string
-        time:
-          type: integer
-          format: int64
-    FundingInfo:
-      type: object
-      description: funding rate metadata per symbol
-      required:
-      - symbol
-      - adjustedFundingRateCap
-      - adjustedFundingRateFloor
-      - fundingIntervalHours
-      properties:
-        adjustedFundingRateCap:
-          type: string
-          format: decimal
-        adjustedFundingRateFloor:
-          type: string
-          format: decimal
-        fundingIntervalHours:
-          type: integer
-          format: int32
-          minimum: 0
-        symbol:
-          type: string
-    Asset:
-      type: object
-      required:
-      - asset
-      - marginAvailable
-      - assetId
-      - decimals
-      - withdrawFee
-      properties:
-        asset:
-          type: string
-        assetId:
-          type: integer
-          format: uint16
-          minimum: 0
-        decimals:
-          type: integer
-          format: uint8
-          minimum: 0
-        marginAvailable:
-          type: boolean
-        tokenId:
-          type:
-          - string
-          - 'null'
-        userDepositLimit:
-          type: string
-          format: decimal
-        withdrawFee:
-          type: string
-          format: decimal
-    PremiumIndex:
-      type: object
-      description: real-time mark price, index price, and estimated funding rate per symbol
-      required:
-      - symbol
-      - markPrice
-      - indexPrice
-      - lastFundingRate
-      - interestRate
-      - estimatedFundingRate
-      - nextFundingTime
-      - time
-      properties:
-        estimatedFundingRate:
-          type: string
-          format: decimal
-          description: pre-computed estimated 1h funding rate (8h rate ÷ 8) from current premium index accumulator
-        indexPrice:
-          type: string
-          format: decimal
-        interestRate:
-          type: string
-          format: decimal
-        lastFundingRate:
-          type: string
-          format: decimal
-          description: funding rate for 8h period
-        markPrice:
-          type: string
-          format: decimal
-        nextFundingTime:
-          type: integer
-          format: int64
-          description: unix timestamp ms of next hourly funding settlement
-        symbol:
-          type: string
-        time:
-          type: integer
-          format: int64
-          description: server time unix ms
-    BorrowLendPoolResponse:
-      type: object
-      required:
-      - asset
-      - assetId
-      - isActive
-      - lastUpdateTimestamp
-      - rateParams
-      - depositLimit
-      - borrowLimit
-      - availableAmount
-      - borrowedAmount
-      - cumulativeDepositRate
-      - cumulativeBorrowRate
-      - accumulatedProtocolFees
-      - unclaimedProtocolFees
-      - interestFeeTenthBps
-      properties:
-        accumulatedProtocolFees:
-          type: string
-          format: decimal
-        asset:
-          type: string
-        assetId:
-          type: integer
-          format: uint16
-          minimum: 0
-        availableAmount:
-          type: string
-          format: decimal
-        borrowLimit:
-          type: string
-          format: decimal
-        borrowedAmount:
-          type: string
-          format: decimal
-        cumulativeBorrowRate:
-          type: string
-          format: decimal
-        cumulativeDepositRate:
-          type: string
-          format: decimal
-        depositLimit:
-          type: string
-          format: decimal
-        interestFeeTenthBps:
-          type: integer
-          format: uint64
-          minimum: 0
-        isActive:
-          type: boolean
-        lastUpdateTimestamp:
-          type: integer
-          format: int64
-        rateParams:
-          $ref: '#/components/schemas/RateParams'
-        unclaimedProtocolFees:
-          type: string
-          format: decimal
-    ExchangeInfo:
-      type: object
-      required:
-      - rateLimits
-      - assets
-      - symbols
-      - globalConfig
-      properties:
-        assets:
-          type: array
-          items:
-            $ref: '#/components/schemas/Asset'
-        chainHash:
-          type:
-          - string
-          - 'null'
-        chainInfo:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ChainInfo'
-        globalConfig:
-          $ref: '#/components/schemas/GlobalConfigResponse'
-        rateLimits:
-          type: array
-          items:
-            $ref: '#/components/schemas/RateLimit'
-        symbols:
-          type: array
-          items:
-            $ref: '#/components/schemas/Symbol'
     FundingRate:
       type: object
       required:
@@ -1099,30 +915,33 @@ components:
           format: decimal
         symbol:
           type: string
-    Trade:
+    InsuranceAsset:
       type: object
       required:
-      - id
-      - price
-      - qty
-      - quoteQty
-      - time
-      - isBuyerMaker
+      - asset
+      - marginBalance
+      - updateTime
       properties:
-        id:
+        asset:
+          type: string
+        marginBalance:
+          type: string
+          format: decimal
+        updateTime:
           type: integer
           format: int64
-        isBuyerMaker:
-          type: boolean
+    PriceTicker:
+      type: object
+      required:
+      - symbol
+      - price
+      - time
+      properties:
         price:
           type: string
           format: decimal
-        qty:
+        symbol:
           type: string
-          format: decimal
-        quoteQty:
-          type: string
-          format: decimal
         time:
           type: integer
           format: int64
@@ -1213,3 +1032,184 @@ components:
           multiplierUp:
             type: string
             format: decimal
+    RateParams:
+      type: object
+      required:
+      - optimal_utilisation_rate
+      - min_borrow_rate
+      - optimal_borrow_rate
+      - max_borrow_rate
+      properties:
+        max_borrow_rate:
+          type: string
+          format: decimal
+        min_borrow_rate:
+          type: string
+          format: decimal
+        optimal_borrow_rate:
+          type: string
+          format: decimal
+        optimal_utilisation_rate:
+          type: string
+          format: decimal
+    ApiErrorResponse:
+      type: object
+      description: 'Structured API error response matching Bullet API format.
+
+
+        All error responses from the trading API conform to this schema.'
+      required:
+      - status
+      - message
+      properties:
+        details:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiErrorDetail'
+            description: Structured per-failure details. Shape depends on the variant.
+        error_id:
+          type:
+          - string
+          - 'null'
+          description: Error identifier for support.
+          example: 8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f
+        message:
+          type: string
+          description: Human-readable error message.
+          example: 'Transaction validation failed: insufficient funds'
+        status:
+          type: integer
+          format: uint16
+          description: HTTP status code.
+          example: 400
+          minimum: 0
+    RateLimit:
+      type: object
+      required:
+      - rateLimitType
+      - interval
+      - intervalNum
+      - limit
+      properties:
+        interval:
+          type: string
+        intervalNum:
+          type: integer
+          format: int32
+        limit:
+          type: integer
+          format: int32
+        rateLimitType:
+          type: string
+    GlobalConfigResponse:
+      type: object
+      required:
+      - maxOrdersPerUser
+      - maxTriggerOrdersPerUser
+      - maxTriggerOrdersToExecutePerMsg
+      - minNotionalTwapValue
+      - minNotionalTwapValuePerOrder
+      - twapExecutionIntervalSeconds
+      properties:
+        maxOrdersPerUser:
+          type: integer
+          format: uint16
+          minimum: 0
+        maxTriggerOrdersPerUser:
+          type: integer
+          format: uint16
+          minimum: 0
+        maxTriggerOrdersToExecutePerMsg:
+          type: integer
+          format: uint16
+          minimum: 0
+        minNotionalTwapValue:
+          type: string
+          format: decimal
+        minNotionalTwapValuePerOrder:
+          type: string
+          format: decimal
+        twapExecutionIntervalSeconds:
+          type: integer
+          format: uint64
+          minimum: 0
+    ChainInfo:
+      type: object
+      description: chain-level constants from the rollup
+      required:
+      - chainId
+      - chainName
+      - gasTokenId
+      - hyperlaneDomain
+      - addressPrefix
+      properties:
+        addressPrefix:
+          type: string
+        chainId:
+          type: integer
+          format: uint64
+          minimum: 0
+        chainName:
+          type: string
+        gasTokenId:
+          type: string
+        hyperlaneDomain:
+          type: integer
+          format: uint64
+          minimum: 0
+    Ticker24hr:
+      type: object
+      required:
+      - symbol
+      - priceChange
+      - priceChangePercent
+      - weightedAvgPrice
+      - lastPrice
+      - openPrice
+      - highPrice
+      - lowPrice
+      - volume
+      - quoteVolume
+      - openTime
+      - closeTime
+      - count
+      properties:
+        closeTime:
+          type: integer
+          format: int64
+        count:
+          type: integer
+          format: int64
+          minimum: 0
+        highPrice:
+          type: string
+          format: decimal
+        lastPrice:
+          type: string
+          format: decimal
+        lowPrice:
+          type: string
+          format: decimal
+        openPrice:
+          type: string
+          format: decimal
+        openTime:
+          type: integer
+          format: int64
+        priceChange:
+          type: string
+          format: decimal
+        priceChangePercent:
+          type: string
+          format: decimal
+        quoteVolume:
+          type: string
+          format: decimal
+        symbol:
+          type: string
+        volume:
+          type: string
+          format: decimal
+        weightedAvgPrice:
+          type: string
+          format: decimal
