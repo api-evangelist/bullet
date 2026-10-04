@@ -277,187 +277,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
-    ApiErrorDetail:
-      oneOf:
-      - $ref: '#/components/schemas/JsonValidationErrorDetail'
-      - type: object
-      description: 'Typed details body. Variant order is important for untagged
-
-        deserialization: keep the more-specific shape (`JsonValidation`)
-
-        before more-permissive ones. `Upstream` holds the upstream payload
-
-        verbatim (object, string, array, number, etc.) so pre-PR clients
-
-        reading `details.error` (or `details` directly) keep working.'
-    AccountBalanceSummary:
-      type: object
-      required:
-      - tradingCredits
-      - unrealizedLossBorrow
-      properties:
-        tradingCredits:
-          type: string
-          format: decimal
-        unrealizedLossBorrow:
-          type: string
-          format: decimal
-    AccountBalance:
-      type: object
-      required:
-      - account
-      - assets
-      - rewards
-      properties:
-        account:
-          $ref: '#/components/schemas/AccountBalanceSummary'
-        assets:
-          type: array
-          items:
-            $ref: '#/components/schemas/AssetBalance'
-        rewards:
-          type: array
-          items:
-            $ref: '#/components/schemas/AssetReward'
-    LeverageBracket:
-      type: object
-      required:
-      - symbol
-      - brackets
-      properties:
-        brackets:
-          type: array
-          items:
-            $ref: '#/components/schemas/Bracket'
-        notionalCoef:
-          type:
-          - number
-          - 'null'
-          format: double
-        symbol:
-          type: string
-    AccountAsset:
-      type: object
-      required:
-      - asset
-      - assetId
-      - walletBalance
-      - updateTime
-      properties:
-        asset:
-          type: string
-        assetId:
-          type: integer
-          format: uint16
-          minimum: 0
-        updateTime:
-          type: integer
-          format: int64
-        walletBalance:
-          type: string
-          format: decimal
-    ApiErrorResponse:
-      type: object
-      description: 'Structured API error response matching Bullet API format.
-
-
-        All error responses from the trading API conform to this schema.'
-      required:
-      - status
-      - message
-      properties:
-        details:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ApiErrorDetail'
-            description: Structured per-failure details. Shape depends on the variant.
-        error_id:
-          type:
-          - string
-          - 'null'
-          description: Error identifier for support.
-          example: 8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f
-        message:
-          type: string
-          description: Human-readable error message.
-          example: 'Transaction validation failed: insufficient funds'
-        status:
-          type: integer
-          format: uint16
-          description: HTTP status code.
-          example: 400
-          minimum: 0
-    AssetBalance:
-      type: object
-      required:
-      - asset
-      - assetId
-      - balance
-      - assetAmount
-      - liabilityAmount
-      - maxWithdrawAmount
-      - updateTime
-      properties:
-        asset:
-          type: string
-        assetAmount:
-          type: string
-          format: decimal
-        assetId:
-          type: integer
-          format: uint16
-          minimum: 0
-        balance:
-          type: string
-          format: decimal
-        liabilityAmount:
-          type: string
-          format: decimal
-        maxWithdrawAmount:
-          type: string
-          format: decimal
-        updateTime:
-          type: integer
-          format: int64
-    Bracket:
-      type: object
-      required:
-      - bracket
-      - initialLeverage
-      - notionalCap
-      - notionalFloor
-      - maintMarginRatio
-      - cum
-      properties:
-        bracket:
-          type: integer
-          format: uint32
-          minimum: 0
-        cum:
-          type: number
-          format: double
-        initialLeverage:
-          type: integer
-          format: uint32
-          minimum: 0
-        maintMarginRatio:
-          type: number
-          format: double
-        notionalCap:
-          type: number
-          format: double
-        notionalFloor:
-          type: number
-          format: double
-    AccountConfig:
-      type: object
-      required:
-      - delegates
-      properties:
-        delegates:
-          type: array
-          items:
-            $ref: '#/components/schemas/Delegate'
     AssetReward:
       type: object
       required:
@@ -485,6 +304,72 @@ components:
           format: decimal
         variant:
           type: string
+    AccountConfig:
+      type: object
+      required:
+      - delegates
+      properties:
+        delegates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Delegate'
+    AccountBalance:
+      type: object
+      required:
+      - account
+      - assets
+      - rewards
+      properties:
+        account:
+          $ref: '#/components/schemas/AccountBalanceSummary'
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetBalance'
+        rewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssetReward'
+    Delegate:
+      type: object
+      required:
+      - address
+      - name
+      - flags
+      properties:
+        address:
+          type: string
+        expiresAt:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        flags:
+          type: integer
+          format: int32
+          minimum: 0
+        name:
+          type: string
+    AccountAsset:
+      type: object
+      required:
+      - asset
+      - assetId
+      - walletBalance
+      - updateTime
+      properties:
+        asset:
+          type: string
+        assetId:
+          type: integer
+          format: uint16
+          minimum: 0
+        updateTime:
+          type: integer
+          format: int64
+        walletBalance:
+          type: string
+          format: decimal
     Account:
       type: object
       required:
@@ -592,26 +477,63 @@ components:
         updateTime:
           type: integer
           format: int64
-    Delegate:
+    AccountBalanceSummary:
       type: object
       required:
-      - address
-      - name
-      - flags
+      - tradingCredits
+      - unrealizedLossBorrow
       properties:
-        address:
+        tradingCredits:
           type: string
-        expiresAt:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        flags:
+          format: decimal
+        unrealizedLossBorrow:
+          type: string
+          format: decimal
+    AssetBalance:
+      type: object
+      required:
+      - asset
+      - assetId
+      - balance
+      - assetAmount
+      - liabilityAmount
+      - maxWithdrawAmount
+      - updateTime
+      properties:
+        asset:
+          type: string
+        assetAmount:
+          type: string
+          format: decimal
+        assetId:
           type: integer
-          format: int32
+          format: uint16
           minimum: 0
-        name:
+        balance:
           type: string
+          format: decimal
+        liabilityAmount:
+          type: string
+          format: decimal
+        maxWithdrawAmount:
+          type: string
+          format: decimal
+        updateTime:
+          type: integer
+          format: int64
+    ApiErrorDetail:
+      oneOf:
+      - $ref: '#/components/schemas/JsonValidationErrorDetail'
+      - type: object
+      description: 'Typed details body. Variant order is important for untagged
+
+        deserialization: keep the more-specific shape (`JsonValidation`)
+
+        before more-permissive ones. `Upstream` holds the upstream payload
+
+        verbatim (object, string, array, number, etc.) so pre-PR clients
+
+        reading `details.error` (or `details` directly) keep working.'
     JsonValidationErrorDetail:
       type: object
       description: 'One JSON shape failure: machine-readable `rule` + full serde
@@ -627,6 +549,84 @@ components:
         rule:
           type: string
           example: wrong_type
+    ApiErrorResponse:
+      type: object
+      description: 'Structured API error response matching Bullet API format.
+
+
+        All error responses from the trading API conform to this schema.'
+      required:
+      - status
+      - message
+      properties:
+        details:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiErrorDetail'
+            description: Structured per-failure details. Shape depends on the variant.
+        error_id:
+          type:
+          - string
+          - 'null'
+          description: Error identifier for support.
+          example: 8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f
+        message:
+          type: string
+          description: Human-readable error message.
+          example: 'Transaction validation failed: insufficient funds'
+        status:
+          type: integer
+          format: uint16
+          description: HTTP status code.
+          example: 400
+          minimum: 0
+    LeverageBracket:
+      type: object
+      required:
+      - symbol
+      - brackets
+      properties:
+        brackets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bracket'
+        notionalCoef:
+          type:
+          - number
+          - 'null'
+          format: double
+        symbol:
+          type: string
+    Bracket:
+      type: object
+      required:
+      - bracket
+      - initialLeverage
+      - notionalCap
+      - notionalFloor
+      - maintMarginRatio
+      - cum
+      properties:
+        bracket:
+          type: integer
+          format: uint32
+          minimum: 0
+        cum:
+          type: number
+          format: double
+        initialLeverage:
+          type: integer
+          format: uint32
+          minimum: 0
+        maintMarginRatio:
+          type: number
+          format: double
+        notionalCap:
+          type: number
+          format: double
+        notionalFloor:
+          type: number
+          format: double
     Balance:
       type: object
       required:

@@ -74,36 +74,64 @@ paths:
       - SolanaOffchainTx
 components:
   schemas:
-    LedgerEvent:
+    TxResult:
+      type: string
+      description: Transaction execution result
+      enum:
+      - successful
+      - reverted
+      - skipped
+    SubmitSolanaOffchainTxRequest:
       type: object
-      description: Ledger event emitted by a transaction
+      description: 'Body for a Solana off-chain signed transaction.
+
+
+        Produced by the bullet SDK''s `solana` / `solanaSimple` authenticators
+
+        (Phantom, Solflare, Ledger). The inner bytes are a Solana off-chain
+
+        signed message, NOT a borsh-serialized Sovereign tx.'
       required:
-      - type
-      - number
-      - key
-      - value
-      - module
+      - body
       properties:
-        key:
+        body:
           type: string
-          description: Event key
-        module:
-          $ref: '#/components/schemas/ModuleRef'
-          description: Module that emitted the event
-        number:
+          description: Base64-encoded Solana off-chain signed message envelope
+    TxReceipt:
+      type: object
+      description: Transaction receipt
+      required:
+      - result
+      properties:
+        result:
+          $ref: '#/components/schemas/TxResult'
+          description: Result of transaction execution
+    SubmitTxResponse:
+      type: object
+      description: Response from submitting a transaction.
+      required:
+      - id
+      - status
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/LedgerEvent'
+          description: Events emitted by the transaction
+        id:
+          type: string
+          description: The transaction hash
+        receipt:
+          $ref: '#/components/schemas/TxReceipt'
+          description: Transaction receipt (if processed)
+        status:
+          $ref: '#/components/schemas/TxStatus'
+          description: Transaction status
+        tx_number:
           type: integer
           format: uint64
-          description: Event number
+          description: Transaction number (if processed)
           minimum: 0
-        tx_hash:
-          type: string
-          description: Transaction hash (if associated with a transaction)
-        type:
-          type: string
-          description: Event type
-        value:
-          type: object
-          description: Event value (arbitrary JSON)
     ApiErrorDetail:
       oneOf:
       - $ref: '#/components/schemas/JsonValidationErrorDetail'
@@ -126,15 +154,6 @@ components:
         name:
           type: string
           description: Module name
-    TxReceipt:
-      type: object
-      description: Transaction receipt
-      required:
-      - result
-      properties:
-        result:
-          $ref: '#/components/schemas/TxResult'
-          description: Result of transaction execution
     TxStatus:
       type: string
       description: Transaction status
@@ -176,55 +195,6 @@ components:
           description: HTTP status code.
           example: 400
           minimum: 0
-    TxResult:
-      type: string
-      description: Transaction execution result
-      enum:
-      - successful
-      - reverted
-      - skipped
-    SubmitSolanaOffchainTxRequest:
-      type: object
-      description: 'Body for a Solana off-chain signed transaction.
-
-
-        Produced by the bullet SDK''s `solana` / `solanaSimple` authenticators
-
-        (Phantom, Solflare, Ledger). The inner bytes are a Solana off-chain
-
-        signed message, NOT a borsh-serialized Sovereign tx.'
-      required:
-      - body
-      properties:
-        body:
-          type: string
-          description: Base64-encoded Solana off-chain signed message envelope
-    SubmitTxResponse:
-      type: object
-      description: Response from submitting a transaction.
-      required:
-      - id
-      - status
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/LedgerEvent'
-          description: Events emitted by the transaction
-        id:
-          type: string
-          description: The transaction hash
-        receipt:
-          $ref: '#/components/schemas/TxReceipt'
-          description: Transaction receipt (if processed)
-        status:
-          $ref: '#/components/schemas/TxStatus'
-          description: Transaction status
-        tx_number:
-          type: integer
-          format: uint64
-          description: Transaction number (if processed)
-          minimum: 0
     JsonValidationErrorDetail:
       type: object
       description: 'One JSON shape failure: machine-readable `rule` + full serde
@@ -240,3 +210,33 @@ components:
         rule:
           type: string
           example: wrong_type
+    LedgerEvent:
+      type: object
+      description: Ledger event emitted by a transaction
+      required:
+      - type
+      - number
+      - key
+      - value
+      - module
+      properties:
+        key:
+          type: string
+          description: Event key
+        module:
+          $ref: '#/components/schemas/ModuleRef'
+          description: Module that emitted the event
+        number:
+          type: integer
+          format: uint64
+          description: Event number
+          minimum: 0
+        tx_hash:
+          type: string
+          description: Transaction hash (if associated with a transaction)
+        type:
+          type: string
+          description: Event type
+        value:
+          type: object
+          description: Event value (arbitrary JSON)

@@ -490,20 +490,7 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
-    ApiErrorDetail:
-      oneOf:
-      - $ref: '#/components/schemas/JsonValidationErrorDetail'
-      - type: object
-      description: 'Typed details body. Variant order is important for untagged
-
-        deserialization: keep the more-specific shape (`JsonValidation`)
-
-        before more-permissive ones. `Upstream` holds the upstream payload
-
-        verbatim (object, string, array, number, etc.) so pre-PR clients
-
-        reading `details.error` (or `details` directly) keep working.'
-    PaginatedResponse_UserTrade:
+    PaginatedResponse_UserDeposit:
       type: object
       description: paginated response wrapper with optional cursor for next page
       required:
@@ -514,127 +501,30 @@ components:
           items:
             type: object
             required:
-            - symbol
-            - id
-            - orderId
-            - side
-            - price
-            - qty
-            - quoteQty
-            - realizedPnl
-            - commission
-            - commissionAsset
-            - time
-            - positionSide
-            - buyer
-            - maker
-            - address
-            - txHash
-            properties:
-              address:
-                type: string
-              buyer:
-                type: boolean
-              clientOrderId:
-                type:
-                - integer
-                - 'null'
-                format: uint64
-                minimum: 0
-              commission:
-                type: string
-                format: decimal
-              commissionAsset:
-                type: string
-              id:
-                type: integer
-                format: uint64
-                minimum: 0
-              maker:
-                type: boolean
-              orderId:
-                type: integer
-                format: uint64
-                minimum: 0
-              positionSide:
-                type: string
-              price:
-                type: string
-                format: decimal
-              qty:
-                type: string
-                format: decimal
-              quoteQty:
-                type: string
-                format: decimal
-              realizedPnl:
-                type: string
-                format: decimal
-              side:
-                type: string
-              symbol:
-                type: string
-              time:
-                type: integer
-                format: int64
-              txHash:
-                type: string
-        nextCursor:
-          type:
-          - string
-          - 'null'
-    PaginatedResponse_UserLiquidation:
-      type: object
-      description: paginated response wrapper with optional cursor for next page
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-            - symbol
-            - liquidateeAddress
-            - liquidatorAddress
-            - marketId
-            - markPrice
-            - size
-            - side
-            - liquidatorReward
-            - realizedPnl
+            - asset
+            - assetId
+            - amount
+            - amountNotional
             - txHash
             - eventNumber
             - time
             properties:
+              amount:
+                type: string
+                format: decimal
+              amountNotional:
+                type: string
+                format: decimal
+              asset:
+                type: string
+              assetId:
+                type: integer
+                format: uint16
+                minimum: 0
               eventNumber:
                 type: integer
                 format: uint64
                 minimum: 0
-              liquidateeAddress:
-                type: string
-              liquidatorAddress:
-                type: string
-              liquidatorReward:
-                type: string
-                format: decimal
-              markPrice:
-                type: string
-                format: decimal
-              marketId:
-                type: integer
-                format: uint16
-                minimum: 0
-              realizedPnl:
-                type: string
-                format: decimal
-              side:
-                type: string
-              size:
-                type: string
-                format: decimal
-              symbol:
-                type: string
               time:
                 type: integer
                 format: int64
@@ -644,37 +534,6 @@ components:
           type:
           - string
           - 'null'
-    ApiErrorResponse:
-      type: object
-      description: 'Structured API error response matching Bullet API format.
-
-
-        All error responses from the trading API conform to this schema.'
-      required:
-      - status
-      - message
-      properties:
-        details:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ApiErrorDetail'
-            description: Structured per-failure details. Shape depends on the variant.
-        error_id:
-          type:
-          - string
-          - 'null'
-          description: Error identifier for support.
-          example: 8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f
-        message:
-          type: string
-          description: Human-readable error message.
-          example: 'Transaction validation failed: insufficient funds'
-        status:
-          type: integer
-          format: uint16
-          description: HTTP status code.
-          example: 400
-          minimum: 0
     PaginatedResponse_HistoricalOrder:
       type: object
       description: paginated response wrapper with optional cursor for next page
@@ -748,50 +607,6 @@ components:
           type:
           - string
           - 'null'
-    PaginatedResponse_UserDeposit:
-      type: object
-      description: paginated response wrapper with optional cursor for next page
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-            - asset
-            - assetId
-            - amount
-            - amountNotional
-            - txHash
-            - eventNumber
-            - time
-            properties:
-              amount:
-                type: string
-                format: decimal
-              amountNotional:
-                type: string
-                format: decimal
-              asset:
-                type: string
-              assetId:
-                type: integer
-                format: uint16
-                minimum: 0
-              eventNumber:
-                type: integer
-                format: uint64
-                minimum: 0
-              time:
-                type: integer
-                format: int64
-              txHash:
-                type: string
-        nextCursor:
-          type:
-          - string
-          - 'null'
     PaginatedResponse_UserWithdrawal:
       type: object
       description: paginated response wrapper with optional cursor for next page
@@ -840,6 +655,80 @@ components:
           type:
           - string
           - 'null'
+    PaginatedResponse_UserLiquidation:
+      type: object
+      description: paginated response wrapper with optional cursor for next page
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - symbol
+            - liquidateeAddress
+            - liquidatorAddress
+            - marketId
+            - markPrice
+            - size
+            - side
+            - liquidatorReward
+            - realizedPnl
+            - txHash
+            - eventNumber
+            - time
+            properties:
+              eventNumber:
+                type: integer
+                format: uint64
+                minimum: 0
+              liquidateeAddress:
+                type: string
+              liquidatorAddress:
+                type: string
+              liquidatorReward:
+                type: string
+                format: decimal
+              markPrice:
+                type: string
+                format: decimal
+              marketId:
+                type: integer
+                format: uint16
+                minimum: 0
+              realizedPnl:
+                type: string
+                format: decimal
+              side:
+                type: string
+              size:
+                type: string
+                format: decimal
+              symbol:
+                type: string
+              time:
+                type: integer
+                format: int64
+              txHash:
+                type: string
+        nextCursor:
+          type:
+          - string
+          - 'null'
+    ApiErrorDetail:
+      oneOf:
+      - $ref: '#/components/schemas/JsonValidationErrorDetail'
+      - type: object
+      description: 'Typed details body. Variant order is important for untagged
+
+        deserialization: keep the more-specific shape (`JsonValidation`)
+
+        before more-permissive ones. `Upstream` holds the upstream payload
+
+        verbatim (object, string, array, number, etc.) so pre-PR clients
+
+        reading `details.error` (or `details` directly) keep working.'
     JsonValidationErrorDetail:
       type: object
       description: 'One JSON shape failure: machine-readable `rule` + full serde
@@ -855,6 +744,37 @@ components:
         rule:
           type: string
           example: wrong_type
+    ApiErrorResponse:
+      type: object
+      description: 'Structured API error response matching Bullet API format.
+
+
+        All error responses from the trading API conform to this schema.'
+      required:
+      - status
+      - message
+      properties:
+        details:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ApiErrorDetail'
+            description: Structured per-failure details. Shape depends on the variant.
+        error_id:
+          type:
+          - string
+          - 'null'
+          description: Error identifier for support.
+          example: 8b2e4d9f-7a1c-4f0e-9c5d-3e6a8b1c2d4f
+        message:
+          type: string
+          description: Human-readable error message.
+          example: 'Transaction validation failed: insufficient funds'
+        status:
+          type: integer
+          format: uint16
+          description: HTTP status code.
+          example: 400
+          minimum: 0
     PaginatedResponse_UserFundingPayment:
       type: object
       description: paginated response wrapper with optional cursor for next page
@@ -885,6 +805,86 @@ components:
                 type: integer
                 format: uint16
                 minimum: 0
+              symbol:
+                type: string
+              time:
+                type: integer
+                format: int64
+              txHash:
+                type: string
+        nextCursor:
+          type:
+          - string
+          - 'null'
+    PaginatedResponse_UserTrade:
+      type: object
+      description: paginated response wrapper with optional cursor for next page
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - symbol
+            - id
+            - orderId
+            - side
+            - price
+            - qty
+            - quoteQty
+            - realizedPnl
+            - commission
+            - commissionAsset
+            - time
+            - positionSide
+            - buyer
+            - maker
+            - address
+            - txHash
+            properties:
+              address:
+                type: string
+              buyer:
+                type: boolean
+              clientOrderId:
+                type:
+                - integer
+                - 'null'
+                format: uint64
+                minimum: 0
+              commission:
+                type: string
+                format: decimal
+              commissionAsset:
+                type: string
+              id:
+                type: integer
+                format: uint64
+                minimum: 0
+              maker:
+                type: boolean
+              orderId:
+                type: integer
+                format: uint64
+                minimum: 0
+              positionSide:
+                type: string
+              price:
+                type: string
+                format: decimal
+              qty:
+                type: string
+                format: decimal
+              quoteQty:
+                type: string
+                format: decimal
+              realizedPnl:
+                type: string
+                format: decimal
+              side:
+                type: string
               symbol:
                 type: string
               time:

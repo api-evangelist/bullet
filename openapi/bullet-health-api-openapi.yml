@@ -88,13 +88,6 @@ components:
         serverTime:
           type: integer
           format: int64
-    HealthState:
-      type: string
-      description: health state for a single component
-      enum:
-      - starting
-      - running
-      - recovering
     PingResponse:
       type: object
     ReadinessStatus:
@@ -112,3 +105,10 @@ components:
             type: string
         ready:
           type: boolean
+    HealthState:
+      type: string
+      description: health state for a single component
+      enum:
+      - starting
+      - running
+      - recovering

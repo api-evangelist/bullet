@@ -54,6 +54,21 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
+    JsonValidationErrorDetail:
+      type: object
+      description: 'One JSON shape failure: machine-readable `rule` + full serde
+
+        message including line/column. Surfaced under `details` on the wire.'
+      required:
+      - rule
+      - message
+      properties:
+        message:
+          type: string
+          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
+        rule:
+          type: string
+          example: wrong_type
     ApiErrorDetail:
       oneOf:
       - $ref: '#/components/schemas/JsonValidationErrorDetail'
@@ -98,21 +113,6 @@ components:
           description: HTTP status code.
           example: 400
           minimum: 0
-    JsonValidationErrorDetail:
-      type: object
-      description: 'One JSON shape failure: machine-readable `rule` + full serde
-
-        message including line/column. Surfaced under `details` on the wire.'
-      required:
-      - rule
-      - message
-      properties:
-        message:
-          type: string
-          example: 'invalid type: integer `24500000`, expected a string at line 4 column 30'
-        rule:
-          type: string
-          example: wrong_type
     AddressState:
       type: object
       required:

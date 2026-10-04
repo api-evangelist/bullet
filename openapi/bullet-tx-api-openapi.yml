@@ -65,45 +65,48 @@ paths:
       - Tx
 components:
   schemas:
-    LedgerEvent:
+    TxResult:
+      type: string
+      description: Transaction execution result
+      enum:
+      - successful
+      - reverted
+      - skipped
+    TxReceipt:
       type: object
-      description: Ledger event emitted by a transaction
+      description: Transaction receipt
       required:
-      - type
-      - number
-      - key
-      - value
-      - module
+      - result
       properties:
-        key:
+        result:
+          $ref: '#/components/schemas/TxResult'
+          description: Result of transaction execution
+    SubmitTxResponse:
+      type: object
+      description: Response from submitting a transaction.
+      required:
+      - id
+      - status
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/LedgerEvent'
+          description: Events emitted by the transaction
+        id:
           type: string
-          description: Event key
-        module:
-          $ref: '#/components/schemas/ModuleRef'
-          description: Module that emitted the event
-        number:
+          description: The transaction hash
+        receipt:
+          $ref: '#/components/schemas/TxReceipt'
+          description: Transaction receipt (if processed)
+        status:
+          $ref: '#/components/schemas/TxStatus'
+          description: Transaction status
+        tx_number:
           type: integer
           format: uint64
-          description: Event number
+          description: Transaction number (if processed)
           minimum: 0
-        tx_hash:
-          type: string
-          description: Transaction hash (if associated with a transaction)
-        type:
-          type: string
-          description: Event type
-        value:
-          type: object
-          description: Event value (arbitrary JSON)
-    ModuleRef:
-      type: object
-      description: Reference to a module
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Module name
     ApiErrorDetail:
       oneOf:
       - $ref: '#/components/schemas/JsonValidationErrorDetail'
@@ -117,15 +120,15 @@ components:
         verbatim (object, string, array, number, etc.) so pre-PR clients
 
         reading `details.error` (or `details` directly) keep working.'
-    TxReceipt:
+    ModuleRef:
       type: object
-      description: Transaction receipt
+      description: Reference to a module
       required:
-      - result
+      - name
       properties:
-        result:
-          $ref: '#/components/schemas/TxResult'
-          description: Result of transaction execution
+        name:
+          type: string
+          description: Module name
     TxStatus:
       type: string
       description: Transaction status
@@ -167,47 +170,6 @@ components:
           description: HTTP status code.
           example: 400
           minimum: 0
-    TxResult:
-      type: string
-      description: Transaction execution result
-      enum:
-      - successful
-      - reverted
-      - skipped
-    SubmitTxResponse:
-      type: object
-      description: Response from submitting a transaction.
-      required:
-      - id
-      - status
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/LedgerEvent'
-          description: Events emitted by the transaction
-        id:
-          type: string
-          description: The transaction hash
-        receipt:
-          $ref: '#/components/schemas/TxReceipt'
-          description: Transaction receipt (if processed)
-        status:
-          $ref: '#/components/schemas/TxStatus'
-          description: Transaction status
-        tx_number:
-          type: integer
-          format: uint64
-          description: Transaction number (if processed)
-          minimum: 0
-    SubmitTxRequest:
-      type: object
-      required:
-      - body
-      properties:
-        body:
-          type: string
-          description: Base64 encoded borsh string
     JsonValidationErrorDetail:
       type: object
       description: 'One JSON shape failure: machine-readable `rule` + full serde
@@ -223,3 +185,41 @@ components:
         rule:
           type: string
           example: wrong_type
+    SubmitTxRequest:
+      type: object
+      required:
+      - body
+      properties:
+        body:
+          type: string
+          description: Base64 encoded borsh string
+    LedgerEvent:
+      type: object
+      description: Ledger event emitted by a transaction
+      required:
+      - type
+      - number
+      - key
+      - value
+      - module
+      properties:
+        key:
+          type: string
+          description: Event key
+        module:
+          $ref: '#/components/schemas/ModuleRef'
+          description: Module that emitted the event
+        number:
+          type: integer
+          format: uint64
+          description: Event number
+          minimum: 0
+        tx_hash:
+          type: string
+          description: Transaction hash (if associated with a transaction)
+        type:
+          type: string
+          description: Event type
+        value:
+          type: object
+          description: Event value (arbitrary JSON)
