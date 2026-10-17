@@ -80,14 +80,6 @@ paths:
                 $ref: '#/components/schemas/ReadinessStatus'
 components:
   schemas:
-    TimeResponse:
-      type: object
-      required:
-      - serverTime
-      properties:
-        serverTime:
-          type: integer
-          format: int64
     PingResponse:
       type: object
     ReadinessStatus:
@@ -105,6 +97,14 @@ components:
             type: string
         ready:
           type: boolean
+    TimeResponse:
+      type: object
+      required:
+      - serverTime
+      properties:
+        serverTime:
+          type: integer
+          format: int64
     HealthState:
       type: string
       description: health state for a single component
