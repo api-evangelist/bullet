@@ -1,0 +1,79 @@
+edges:
+- partner_name: crates.io
+  partner: crates-io
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Rust)
+  evidence: https://crates.io/crates/bullet-rust-sdk
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: crates.io (public registry JSON)
+    spec_file: null
+    language: Rust
+    packages:
+    - name: bullet-rust-sdk
+      version: 0.40.0
+      released: '2026-10-13'
+      released_field: updated_at
+      lapsed: false
+      page: https://crates.io/crates/bullet-rust-sdk
+      repo_leg: domain:bullet.xyz
+      publisher_leg: org:bulletxyz
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@bulletxyz/sdk-wasm
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@bulletxyz/sdk-wasm'
+      version: 0.0.42
+      released: '2026-10-13'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@bulletxyz/sdk-wasm
+      repo_leg: domain:bullet.xyz
+      publisher_leg: org:bulletxyz
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+generated: '2026-10-18'
+method: searched
+source:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
+checked:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
